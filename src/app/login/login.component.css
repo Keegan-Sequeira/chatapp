@@ -1,0 +1,15 @@
+
+form {
+    width: 50%;
+    margin-top: 3em;
+    margin-left: 25%;
+}
+
+.form-group{
+    padding: 1em;
+}
+
+#login-button{
+    width: 60%;
+    margin-left: 20%;
+}
