@@ -12,5 +12,4 @@ app.listen(3000, "127.0.0.1", function() {
     var m = d.getMinutes();
 
     console.log(`Server started at ${n}:${m}`);
-    console.log(__dirname + "/../dist/chatapp");
 });
