@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +21,8 @@ import { SignupComponent } from './signup/signup.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

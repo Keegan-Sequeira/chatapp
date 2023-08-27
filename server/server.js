@@ -13,3 +13,5 @@ app.listen(3000, "127.0.0.1", function() {
 
     console.log(`Server started at ${n}:${m}`);
 });
+
+app.post("/api/auth/login", require("./routes/postLogin"));
