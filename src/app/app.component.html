@@ -11,9 +11,11 @@
 
       <li class="nav-item"><a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" routerLink="/chat">Chat</a></li>
 
-      <li class="nav-item"><a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" routerLink="/signup">Signup</a></li>
+      <li *ngIf="!validUser" class="nav-item"><a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" routerLink="/signup">Signup</a></li>
 
-      <li class="nav-item"><a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" routerLink="/login">Login</a></li>
+      <li *ngIf="!validUser" class="nav-item"><a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" routerLink="/login">Login</a></li>
+
+      <li *ngIf="validUser" class="nav-item"><a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" routerLink="/logout">Logout</a></li>
 
     </ul>
 

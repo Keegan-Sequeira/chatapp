@@ -9,7 +9,21 @@ form {
     padding: 1em;
 }
 
-#login-button{
+#signup-button{
     width: 60%;
     margin-left: 20%;
+}
+
+.error{
+    color: red;
+
+    width: 75%;
+    margin: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+    text-align: center;
+}
+
+.hide{
+    display: none;
 }
