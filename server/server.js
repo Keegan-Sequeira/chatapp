@@ -24,7 +24,3 @@ sockets.connect(io, PORT);
 server.listen(http, PORT);
 
 app.post("/api/auth/login", require("./routes/postLogin"));
-
-app.get("/hello", function(req, res){
-    res.send("test");
-});
