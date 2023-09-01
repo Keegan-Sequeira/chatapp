@@ -11,6 +11,7 @@ import { SignupComponent } from './signup/signup.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { LogoutComponent } from './logout/logout.component';
+import { GroupManagerComponent } from './group-manager/group-manager.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LogoutComponent } from './logout/logout.component';
     HomeComponent,
     LoginComponent,
     SignupComponent,
-    LogoutComponent
+    LogoutComponent,
+    GroupManagerComponent
   ],
   imports: [
     BrowserModule,

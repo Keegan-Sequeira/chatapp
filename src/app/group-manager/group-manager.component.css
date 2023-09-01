@@ -1,0 +1,19 @@
+.main-content{
+    width: 60%;
+    margin: auto;
+    margin-top: 1em;
+}
+
+button{
+    margin-top: 1em;
+    width: 100%;
+}
+
+ul:hover{
+    cursor: pointer;
+}
+
+ul li:hover{
+    color: var(--bs-primary);
+    text-decoration: underline;
+}
