@@ -1,17 +1,30 @@
-var express = require("express");
-var app = express();
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const http = require("http").Server(app);
+const io = require("socket.io") (http, {
+    cors: {
+        origin: "http://localhost:4200",
+        methods: ["GET", "POST"]
+    }
+});
+
+const sockets = require("./socket.js");
+const server = require("./listen.js");
+
+const PORT = 3000;
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-app.use(express.static(__dirname + "/../dist/chatapp"));
+app.use(cors());
 
-app.listen(3000, "127.0.0.1", function() {
-    var d = new Date();
-    var n = d.getHours();
-    var m = d.getMinutes();
+sockets.connect(io, PORT);
 
-    console.log(`Server started at ${n}:${m}`);
-});
+server.listen(http, PORT);
 
 app.post("/api/auth/login", require("./routes/postLogin"));
+
+app.get("/hello", function(req, res){
+    res.send("test");
+});
