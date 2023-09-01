@@ -7,7 +7,9 @@
 
       <li class="nav-item"><a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" routerLink="/">Home</a></li>
 
-      <li class="nav-item"><a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" routerLink="/manage">Manage</a></li>
+      <li *ngIf="highestRole == 'groupAdmin' || highestRole == 'superAdmin'" class="nav-item"><a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" routerLink="/manageusers">Manage Users</a></li>
+
+      <li *ngIf="highestRole == 'superAdmin'" class="nav-item"><a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" routerLink="/manageadmins">Manage Admins</a></li>
 
       <li class="nav-item"><a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" routerLink="/chat">Chat</a></li>
 
@@ -18,7 +20,6 @@
       <li *ngIf="validUser" class="nav-item"><a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" routerLink="/logout">Logout</a></li>
 
     </ul>
-
 
   </div>
 </nav>
