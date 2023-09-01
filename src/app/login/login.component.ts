@@ -1,13 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Title } from "@angular/platform-browser";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
 import {Router} from "@angular/router";
+import { ApiService } from "../services/api.service";
 
-const headerOptions = {
-  headers: new HttpHeaders( { "Content-Type": "application/json" } )
-};
-
-const backendURL = "http://localhost:3000";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +11,7 @@ const backendURL = "http://localhost:3000";
 })
 export class LoginComponent implements OnInit{
 
-  constructor (private title: Title, private httpClient: HttpClient, private router: Router){}
+  constructor (private title: Title, private api: ApiService, private router: Router){}
   username = "";
   password = "";
 
@@ -40,8 +35,8 @@ export class LoginComponent implements OnInit{
       password: this.password
     };
 
-    this.httpClient.post(backendURL + "/api/auth/login", body, headerOptions)
-    .subscribe( (data: any) => {
+    this.api.requestData("/api/auth/login", body)
+    .subscribe( (data: any ) => {
       if (data.valid == true){
         sessionStorage.setItem("valid", data.valid.toString());
         sessionStorage.setItem("username", data.username.toString());
@@ -54,6 +49,9 @@ export class LoginComponent implements OnInit{
       } else {
         sessionStorage.setItem("valid", data.valid.toString());
       }
-    })
+    });
+
+
+    
   }
 }
