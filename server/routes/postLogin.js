@@ -11,7 +11,7 @@ module.exports = function(req, res) {
     fs.readFile("./data/users.json", "utf8", function(err, data){
         let users = JSON.parse(data);
 
-        for (user of users) {
+        for (let user of users) {
             if (username == user.username && password == user.password) {
                 valid = true;
                 response = {

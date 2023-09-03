@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Title } from "@angular/platform-browser";
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-signup',
@@ -8,7 +9,7 @@ import { Title } from "@angular/platform-browser";
 })
 export class SignupComponent implements OnInit{
 
-  constructor (private title: Title){}
+  constructor (private title: Title, private apiService: ApiService){}
   username = "";
   email = "";
   password = "";
@@ -37,7 +38,6 @@ export class SignupComponent implements OnInit{
     let number = /[0-9]/g;
 
     if (this.password.length >= 8 && this.password.match(upperCase) && this.password.match(lowerCase) && this.password.match(number)){
-      valid = true;
       this.error?.nativeElement.setAttribute("class", "error hide");
     } else {
       valid = false;
@@ -47,7 +47,6 @@ export class SignupComponent implements OnInit{
     let hashtag = /(@)/g;
 
     if (this.email.match(hashtag)){
-      valid = true;
       this.emailError?.nativeElement.setAttribute("class", "error hide");
     } else {
       valid = false;
@@ -55,7 +54,22 @@ export class SignupComponent implements OnInit{
     }
 
     if (valid) {
-      console.log("Create new user");
+      console.log("Create new user. Sending HTTP Request");
+      let body = {
+        username: this.username,
+        email: this.email,
+        password: this.password
+      }
+
+      this.apiService.apiPost("/api/signup", body)
+      .subscribe ( (data: any) =>{
+        if (data.successful == true){
+          console.log("New user created");
+        } else {
+          console.log("there was an error");
+        }
+      });
+
     }
 
   }
