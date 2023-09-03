@@ -16,7 +16,7 @@ export class ApiService {
 
   data = {};
 
-  requestData(url: string, body: object){
+  apiPost(url: string, body: object){
     return this.httpClient.post(BACKEND_URL+url, body, headerOptions);
   }
 }

@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit{
       password: this.password
     };
 
-    this.api.requestData("/api/auth/login", body)
+    this.api.apiPost("/api/auth/login", body)
     .subscribe( (data: any ) => {
       if (data.valid == true){
         localStorage.setItem("valid", data.valid.toString());

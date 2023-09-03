@@ -24,3 +24,5 @@ sockets.connect(io, PORT);
 server.listen(http, PORT);
 
 app.post("/api/auth/login", require("./routes/postLogin"));
+
+app.post("/api/signup", require("./routes/signup"));
