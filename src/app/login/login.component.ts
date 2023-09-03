@@ -38,16 +38,16 @@ export class LoginComponent implements OnInit{
     this.api.requestData("/api/auth/login", body)
     .subscribe( (data: any ) => {
       if (data.valid == true){
-        sessionStorage.setItem("valid", data.valid.toString());
-        sessionStorage.setItem("username", data.username.toString());
-        sessionStorage.setItem("email", data.email.toString());
-        sessionStorage.setItem("id", data.id.toString());
-        sessionStorage.setItem("groups", data.groups.toString());
-        sessionStorage.setItem("highestRole", data.roles[0].toString());
+        localStorage.setItem("valid", data.valid.toString());
+        localStorage.setItem("username", data.username.toString());
+        localStorage.setItem("email", data.email.toString());
+        localStorage.setItem("id", data.id.toString());
+        localStorage.setItem("groups", data.groups.toString());
+        localStorage.setItem("highestRole", data.roles[0].toString());
 
         this.router.navigate(["/"]);
       } else {
-        sessionStorage.setItem("valid", data.valid.toString());
+        localStorage.setItem("valid", data.valid.toString());
       }
     });
 

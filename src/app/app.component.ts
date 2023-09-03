@@ -13,8 +13,8 @@ export class AppComponent {
 
   // Check if user is valid
   ngDoCheck(){
-    this.validUser = sessionStorage.getItem("valid") == "true";
-    this.username = sessionStorage.getItem("username") ?? "";
-    this.highestRole = sessionStorage.getItem("highestRole") ?? "";
+    this.validUser = localStorage.getItem("valid") == "true";
+    this.username = localStorage.getItem("username") ?? "";
+    this.highestRole = localStorage.getItem("highestRole") ?? "";
   }
 }
