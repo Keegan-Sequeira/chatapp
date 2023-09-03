@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Title } from "@angular/platform-browser";
 import { ApiService } from '../services/api.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-signup',
@@ -9,7 +10,7 @@ import { ApiService } from '../services/api.service';
 })
 export class SignupComponent implements OnInit{
 
-  constructor (private title: Title, private apiService: ApiService){}
+  constructor (private title: Title, private apiService: ApiService, private router: Router){}
   username = "";
   email = "";
   password = "";
@@ -65,6 +66,7 @@ export class SignupComponent implements OnInit{
       .subscribe ( (data: any) =>{
         if (data.successful == true){
           console.log("New user created");
+          this.router.navigate(["/"]);
         } else {
           console.log("there was an error");
         }

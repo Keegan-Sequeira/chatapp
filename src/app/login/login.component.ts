@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit{
         this.router.navigate(["/"]);
       } else {
         localStorage.setItem("valid", data.valid.toString());
+        alert("Incorrect username or password");
       }
     });
 

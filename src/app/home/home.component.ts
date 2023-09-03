@@ -9,9 +9,15 @@ import { Title } from "@angular/platform-browser";
 export class HomeComponent implements OnInit {
 
   constructor (private title: Title){}
+
+  user = "";
   
   ngOnInit() {
     this.title.setTitle("ChatLink")
+  }
+
+  ngDoCheck(){
+    this.user = localStorage.getItem("username") ?? "";
   }
 
 }
