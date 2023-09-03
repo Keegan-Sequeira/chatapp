@@ -1,4 +1,4 @@
-let users = require("../data/users");
+var fs = require("fs");
 
 module.exports = function(req, res) {
 
@@ -8,25 +8,28 @@ module.exports = function(req, res) {
     let valid = false;
     let response;
 
-    for (user of users) {
-        if (username == user.username && password == user.password) {
-            valid = true;
-            response = {
-                valid: true,
-                username: user.username,
-                email: user.email,
-                id: user.id,
-                groups: user.groups,
-                roles: user.roles
-            };
-            break;
-        }
-    }
+    fs.readFile("./data/users.json", "utf8", function(err, data){
+        let users = JSON.parse(data);
 
-    if (valid == true) {
-        res.send(response);
-    } else {
-        res.send({valid: false});
-    }
+        for (user of users) {
+            if (username == user.username && password == user.password) {
+                valid = true;
+                response = {
+                    valid: true,
+                    username: user.username,
+                    email: user.email,
+                    id: user.id,
+                    groups: user.groups,
+                    roles: user.roles
+                };
+                break;
+            }
+        }
     
+        if (valid == true) {
+            res.send(response);
+        } else {
+            res.send({valid: false});
+        }
+    });    
 }

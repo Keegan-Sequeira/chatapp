@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "username": "super",
+        "password": "123",
+        "email": "admin@chatlink.com",
+        "roles": ["SA", "GA", "US"],
+        "groups": ["open"]
+    },
+    {
+        "id": 2,
+        "username": "bob_smith",
+        "password": "Password1",
+        "email": "bob@gmail.com",
+        "roles": ["GA", "US"],
+        "groups": ["open"]
+    },
+    {
+        "id": 3,
+        "username": "kate312",
+        "password": "Password2",
+        "email": "kate.s@gmail.com",
+        "roles": ["US"],
+        "groups": ["open"]
+    }
+]
