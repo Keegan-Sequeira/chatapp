@@ -5,12 +5,7 @@
         Select a group to manage. Or add a new group.
     </p>
     <ul class="list-group">
-        <li class="list-group-item">Group 1</li>
-        <li class="list-group-item">Group 2</li>
-        <li class="list-group-item">Group 3</li>
-        <li class="list-group-item">Group 4</li>
-        <li class="list-group-item">Group 5</li>
-
+        <li *ngFor="let group of groups" class="list-group-item">{{group.name}}</li>
     </ul>
 
     <button class="btn btn-primary">Create New Group</button>

@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit{
         localStorage.setItem("username", data.username.toString());
         localStorage.setItem("email", data.email.toString());
         localStorage.setItem("id", data.id.toString());
-        localStorage.setItem("groups", data.groups.toString());
+        localStorage.setItem("groups", JSON.stringify(data.groups));
         localStorage.setItem("highestRole", data.roles[0].toString());
 
         this.router.navigate(["/"]);

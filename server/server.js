@@ -26,3 +26,5 @@ server.listen(http, PORT);
 app.post("/api/auth/login", require("./routes/postLogin"));
 
 app.post("/api/signup", require("./routes/signup"));
+
+app.post("/api/user/groups", require("./routes/usergroups"));
