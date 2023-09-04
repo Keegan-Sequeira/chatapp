@@ -33,7 +33,15 @@ export class GroupComponent implements OnInit {
   }
 
   newChannel(){
-    console.log("Create nwe channel " + this.name);
+    this.api.apiPost("/api/groups/channel/create", {name: this.name, groupID: this.id})
+    .subscribe( (data: any) => {
+      if (data.successful == true){
+        alert("Channel Created Successfully.");
+      } else {
+        alert("There was an error creating channel.");
+      }
+      window.location.reload();
+    });
   }
 
 }
