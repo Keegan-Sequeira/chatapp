@@ -8,7 +8,7 @@ module.exports = function(req, res) {
     fs.readFile("./data/users.json", "utf8", function(err, data){
         let existingJSON = JSON.parse(data);
 
-        let userID = existingJSON.length;
+        let userID = existingJSON.length + 1;
         
         let newUser = {
             "id": userID,

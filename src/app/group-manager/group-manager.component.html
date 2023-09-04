@@ -8,5 +8,15 @@
         <li *ngFor="let group of groups" class="list-group-item">{{group.name}}</li>
     </ul>
 
-    <button class="btn btn-primary">Create New Group</button>
+    <form class="new-group">    
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="New Group..." name="name" id="name" [(ngModel)]="name">
+            <div class="input-group-append">
+                <button (click)="createGroup()" class="btn btn-primary" type="button">Create Group</button>
+            </div>
+        </div>
+    </form>
+
+
+    
 </div>

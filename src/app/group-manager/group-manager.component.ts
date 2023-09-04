@@ -11,14 +11,26 @@ export class GroupManagerComponent implements OnInit{
   constructor (private api: ApiService) {}
 
   groups = [{name: null}];
+  name = "";
 
   ngOnInit() {
     let getGroups = localStorage.getItem("groups") ?? "[]";
     getGroups = JSON.parse(getGroups);
     
-    this.api.apiPost("/api/user/groups", {groups: getGroups})
+    this.api.apiPost("/api/groups/user", {groups: getGroups})
     .subscribe( (data: any) =>{
       this.groups = data.groups;
+    });
+  }
+
+  createGroup(){
+    this.api.apiPost("/api/groups/create", {name: this.name})
+    .subscribe( (data: any) => {
+      if (data.successful == true){
+        alert("Group Created Succesfully.");
+      } else {
+        alert("Couldn't Create a Group");
+      }
     });
   }
 }
