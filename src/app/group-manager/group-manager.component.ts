@@ -12,10 +12,12 @@ export class GroupManagerComponent implements OnInit{
 
   groups = [{name: null}];
   name = "";
+  userId: any;
 
   ngOnInit() {
     let getGroups = localStorage.getItem("groups") ?? "[]";
     getGroups = JSON.parse(getGroups);
+    this.userId = localStorage.getItem("id");
     
     this.api.apiPost("/api/groups/user", {groups: getGroups})
     .subscribe( (data: any) =>{
@@ -24,7 +26,7 @@ export class GroupManagerComponent implements OnInit{
   }
 
   createGroup(){
-    this.api.apiPost("/api/groups/create", {name: this.name})
+    this.api.apiPost("/api/groups/create", {name: this.name, userId: this.userId})
     .subscribe( (data: any) => {
       if (data.successful == true){
         alert("Group Created Succesfully.");
