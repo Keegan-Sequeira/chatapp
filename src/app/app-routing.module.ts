@@ -5,13 +5,15 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { LogoutComponent } from './logout/logout.component';
 import { GroupManagerComponent } from './group-manager/group-manager.component';
+import { GroupComponent } from './group/group.component';
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
   {path: "login", component: LoginComponent},
   {path: "signup", component: SignupComponent},
   {path: "logout", component: LogoutComponent},
-  {path: "managegroups", component: GroupManagerComponent}
+  {path: "managegroups", component: GroupManagerComponent},
+  {path: "manage/group/:id", component: GroupComponent}
 ];
 
 @NgModule({

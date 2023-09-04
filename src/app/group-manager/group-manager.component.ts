@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { Router } from '@angular/router';
+import { group } from '@angular/animations';
 
 @Component({
   selector: 'app-group-manager',
@@ -11,7 +12,7 @@ export class GroupManagerComponent implements OnInit{
 
   constructor (private api: ApiService, private router: Router) {}
 
-  groups = [{name: null}];
+  groups = [{name: null, id: null}];
   name = "";
   userId: any;
 
@@ -45,5 +46,9 @@ export class GroupManagerComponent implements OnInit{
       }
       window.location.reload();
     });
+  }
+
+  manage(groupID: any){
+    this.router.navigate(["/manage/group/", groupID]);
   }
 }

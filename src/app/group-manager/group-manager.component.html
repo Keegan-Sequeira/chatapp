@@ -5,7 +5,7 @@
         Select a group to manage. Or add a new group.
     </p>
     <ul class="list-group">
-        <li *ngFor="let group of groups" class="list-group-item">{{group.name}}</li>
+        <li *ngFor="let group of groups" class="list-group-item" (click)="manage(group.id)">{{group.name}}</li>
     </ul>
 
     <form class="new-group">    
