@@ -14,6 +14,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { GroupManagerComponent } from './group-manager/group-manager.component';
 import { GroupComponent } from './group/group.component';
 import { ChatComponent } from './chat/chat.component';
+import { UserManagerComponent } from './user-manager/user-manager.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ChatComponent } from './chat/chat.component';
     LogoutComponent,
     GroupManagerComponent,
     GroupComponent,
-    ChatComponent
+    ChatComponent,
+    UserManagerComponent
   ],
   imports: [
     BrowserModule,

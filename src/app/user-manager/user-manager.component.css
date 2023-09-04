@@ -1,0 +1,17 @@
+.main-content{
+    width: 60%;
+    margin: auto;
+    margin-top: 1em;
+}
+
+.user .list-group-item{
+    width: 60%;
+}
+
+.user{
+    display: inline-flex;
+} 
+.user button{
+    width: 20%;
+    border-radius: 0;
+}

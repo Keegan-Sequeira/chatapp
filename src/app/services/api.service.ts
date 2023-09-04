@@ -19,4 +19,8 @@ export class ApiService {
   apiPost(url: string, body: object){
     return this.httpClient.post(BACKEND_URL+url, body, headerOptions);
   }
+
+  apiGet(url: string){
+    return this.httpClient.get(BACKEND_URL+url, headerOptions);
+  }
 }
