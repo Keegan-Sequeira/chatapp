@@ -1,0 +1,49 @@
+.main-content{
+    display: flex;
+    border: black solid;
+}
+
+.groups{
+    width: 20%;
+}
+
+.group {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.group:hover {
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+.channels{
+    width: 20%;
+}
+
+.channel {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.channel:hover {
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+.chat{
+    width: 100%;
+    border: solid red;
+    
+}
+
+.video img{
+    width: 100%;
+}
+
+.chat .text{
+    border: green solid;
+    overflow-y: scroll;
+    height: 10em;
+    
+}

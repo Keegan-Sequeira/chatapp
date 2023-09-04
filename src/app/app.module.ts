@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LogoutComponent } from './logout/logout.component';
 import { GroupManagerComponent } from './group-manager/group-manager.component';
 import { GroupComponent } from './group/group.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { GroupComponent } from './group/group.component';
     SignupComponent,
     LogoutComponent,
     GroupManagerComponent,
-    GroupComponent
+    GroupComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

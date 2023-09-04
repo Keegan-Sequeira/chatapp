@@ -6,6 +6,7 @@ import { SignupComponent } from './signup/signup.component';
 import { LogoutComponent } from './logout/logout.component';
 import { GroupManagerComponent } from './group-manager/group-manager.component';
 import { GroupComponent } from './group/group.component';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: "signup", component: SignupComponent},
   {path: "logout", component: LogoutComponent},
   {path: "managegroups", component: GroupManagerComponent},
-  {path: "manage/group/:id", component: GroupComponent}
+  {path: "manage/group/:id", component: GroupComponent},
+  {path: "chat", component: ChatComponent}
 ];
 
 @NgModule({
