@@ -1,16 +1,26 @@
 <div class="main-content">
 
 
-    <h2>Group Name</h2>
+    <h2>{{group.name}}</h2>
 
     <p>
         Manage group here.
     </p>
 
     <ul class="list-group">
-        <li class="list-group-item">Channel 1</li>
-        <li class="list-group-item">Channel 2</li>
-        <li class="list-group-item">Channel 3</li>
+        <div *ngFor="let channel of group.channels" class="channel">
+            <li class="list-group-item">{{channel}}</li>
+            <button class="btn btn-danger">Delete</button>
+        </div>
     </ul>
+
+    <form class="new-chan">    
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="New Channel..." name="name" id="name" [(ngModel)]="name">
+            <div class="input-group-append">
+                <button (click)="newChannel()" class="btn btn-primary" type="button">Create Channel</button>
+            </div>
+        </div>
+    </form>
 
 </div>

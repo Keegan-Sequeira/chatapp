@@ -1,14 +1,20 @@
-ul:hover{
-    cursor: pointer;
-}
-
-ul li:hover{
-    color: var(--bs-primary);
-    text-decoration: underline;
-}
-
 .main-content{
     width: 60%;
     margin: auto;
     margin-top: 1em;
+}
+
+.new-chan{
+    margin-top: 1em;
+}
+
+.channel .list-group-item{
+    width: 80%;
+}
+
+.channel{
+    display: inline-flex;
+} 
+.channel button{
+    width: 20%;
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-group',
@@ -9,16 +10,30 @@ import { ActivatedRoute } from '@angular/router';
 export class GroupComponent implements OnInit {
   id: number = 0;
   private sub: any;
+  name = "";
+  group = {
+    name: null,
+    channels: []
+  }
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private api: ApiService) {}
 
   ngOnInit() {
-    this.id = 1
     this.sub = this.route.params.subscribe(params => {
-      this.id = +params['id']; // (+) converts string 'id' to a number
-
+      this.id = +params['id']; 
       console.log(this.id);
+
+      this.api.apiPost("/api/groups/info", {id: this.id})
+      .subscribe( (data: any) => {
+        this.group = data;
+        console.log(data);
+        console.log(this.group)
+      });      
    });
+  }
+
+  newChannel(){
+    console.log("Create nwe channel " + this.name);
   }
 
 }

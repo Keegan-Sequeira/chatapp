@@ -32,3 +32,5 @@ app.post("/api/user/info", require("./routes/userinfo"));
 app.post("/api/groups/user", require("./routes/usergroups"));
 
 app.post("/api/groups/create", require("./routes/newgroup"));
+
+app.post("/api/groups/info", require("./routes/groupinfo"));
