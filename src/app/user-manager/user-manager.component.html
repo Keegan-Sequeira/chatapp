@@ -8,7 +8,7 @@
     <ul class="list-group">
         <div *ngFor="let admin of GA" class="user">
             <li class="list-group-item">{{admin.username}}</li>
-            <button class="btn btn-success">Promote</button>
+            <button class="btn btn-success" (click)="promote(admin.id, 'SA')">Promote</button>
             <button class="btn btn-danger">Demote</button>
         </div>
     </ul>
@@ -19,7 +19,7 @@
     <ul class="list-group">
         <div *ngFor="let user of US" class="user">
             <li class="list-group-item">{{user.username}}</li>
-            <button class="btn btn-success" style="width: 40%;">Promote</button>
+            <button class="btn btn-success" style="width: 40%;" (click)="promote(user.id, 'GA')">Promote</button>
         </div>
     </ul>
 

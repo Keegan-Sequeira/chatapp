@@ -1,4 +1,3 @@
-const { response } = require("express");
 const fs = require("fs");
 
 module.exports = function(req, res){

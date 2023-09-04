@@ -21,4 +21,16 @@ export class UserManagerComponent implements OnInit{
     });
   }
 
+  promote(user: any, newRank: string){
+    this.api.apiPost("/api/user/promote", {userID: user, rank: newRank})
+    .subscribe( (data: any) => {
+      if (data.successful == true){
+        alert("User promoted!");
+      } else {
+        alert("User Demoted!");
+      }
+      window.location.reload();
+    });
+  }
+
 }
