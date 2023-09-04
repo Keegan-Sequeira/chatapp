@@ -64,8 +64,13 @@ export class SignupComponent implements OnInit{
 
       this.apiService.apiPost("/api/signup", body)
       .subscribe ( (data: any) =>{
-        if (data.successful == true){
-          console.log("New user created");
+        if (data.valid == true){
+          localStorage.setItem("valid", data.valid.toString());
+          localStorage.setItem("username", data.username.toString());
+          localStorage.setItem("email", data.email.toString());
+          localStorage.setItem("id", data.id.toString());
+          localStorage.setItem("groups", JSON.stringify(data.groups));
+          localStorage.setItem("highestRole", data.roles[0].toString());
           this.router.navigate(["/"]);
         } else {
           console.log("there was an error");

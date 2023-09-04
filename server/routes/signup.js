@@ -28,7 +28,15 @@ module.exports = function(req, res) {
                 console.log(err);
                 res.send({successful: false});
             } else {
-                res.send({successful: true});
+                let response = {
+                    valid: true,
+                    username: newUser.username,
+                    email: newUser.email,
+                    id: newUser.id,
+                    groups: newUser.groups,
+                    roles: newUser.roles
+                };
+                res.send(response);
             }
         });
     });
