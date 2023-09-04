@@ -25,9 +25,9 @@ export class UserManagerComponent implements OnInit{
     this.api.apiPost("/api/user/promote", {userID: user, rank: newRank})
     .subscribe( (data: any) => {
       if (data.successful == true){
-        alert("User promoted!");
+        alert("User Modified");
       } else {
-        alert("User Demoted!");
+        alert("Error. Try Again Later.");
       }
       window.location.reload();
     });
