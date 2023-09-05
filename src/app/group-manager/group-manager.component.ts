@@ -17,6 +17,13 @@ export class GroupManagerComponent implements OnInit{
   userId: any;
 
   ngOnInit() {
+
+    let validUser = localStorage.getItem("highestRole");
+
+    if (validUser != "GA" && validUser != "SA"){
+      this.router.navigate(["/"]);
+    }
+
     let getGroups = localStorage.getItem("groups") ?? "[]";
     getGroups = JSON.parse(getGroups);
     this.userId = localStorage.getItem("id");

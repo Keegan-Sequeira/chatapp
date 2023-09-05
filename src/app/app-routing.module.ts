@@ -14,10 +14,10 @@ const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "signup", component: SignupComponent},
   {path: "logout", component: LogoutComponent},
-  {path: "managegroups", component: GroupManagerComponent},
+  {path: "manage/groups", component: GroupManagerComponent},
   {path: "manage/group/:id", component: GroupComponent},
   {path: "chat", component: ChatComponent},
-  {path: "manageusers", component: UserManagerComponent}
+  {path: "manage/users", component: UserManagerComponent}
 ];
 
 @NgModule({

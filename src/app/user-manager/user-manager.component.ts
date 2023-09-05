@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-user-manager',
@@ -11,9 +12,16 @@ export class UserManagerComponent implements OnInit{
   GA = [{id: null, username: null, email: null}];
   US = [{id: null, username: null, email: null}];
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private router: Router) {}
   
   ngOnInit() {
+
+    let validUser = localStorage.getItem("highestRole");
+
+    if (validUser != "GA" && validUser != "SA"){
+      this.router.navigate(["/"]);
+    }
+
     this.api.apiGet("/api/user/list")
     .subscribe( (data: any) => {
       this.GA = data.GA;

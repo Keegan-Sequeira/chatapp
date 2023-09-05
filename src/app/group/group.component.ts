@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-group',
@@ -16,9 +17,16 @@ export class GroupComponent implements OnInit {
     channels: []
   }
 
-  constructor(private route: ActivatedRoute, private api: ApiService) {}
+  constructor(private route: ActivatedRoute, private api: ApiService, private router: Router) {}
 
   ngOnInit() {
+
+    let validUser = localStorage.getItem("highestRole");
+
+    if (validUser != "GA" && validUser != "SA"){
+      this.router.navigate(["/"]);
+    }
+
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id']; 
 
