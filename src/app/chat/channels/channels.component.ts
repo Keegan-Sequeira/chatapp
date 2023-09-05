@@ -20,7 +20,6 @@ export class ChannelsComponent implements OnInit{
     this.api.apiPost("/api/groups/info", {id: this.groupID})
     .subscribe( (data: any) => {
       this.group = data;
-      console.log(this.group);
     });
 
   }

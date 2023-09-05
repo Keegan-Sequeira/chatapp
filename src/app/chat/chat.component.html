@@ -1,7 +1,7 @@
 <div class="main-content">
 
     <div class="groups">
-        <div (click)="showChannels(group.id)" *ngFor="let group of groups" class="group">{{group.name}}</div>
+        <div (click)="showChannels(group.id, $event.target)" *ngFor="let group of groups" class="group">{{group.name}}</div>
     </div>
     
     <span #channelContainer id="channels">

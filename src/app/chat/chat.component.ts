@@ -12,6 +12,7 @@ export class ChatComponent implements OnInit{
 
   groups = [{name: null, id: null}];
   groupID = 0;
+  previous: any = null;
   constructor (private router: Router, private api: ApiService, private vcr: ViewContainerRef, private renderer: Renderer2) {}
 
   //@ViewChild("channelContainer") channelContainer?: ViewContainerRef;
@@ -32,10 +33,15 @@ export class ChatComponent implements OnInit{
     });
   }
 
-  showChannels(id: any){
+  showChannels(id: any, groupDiv: any){
     this.channelContainer?.clear();
     const component = this.channelContainer?.createComponent(ChannelsComponent);
     component!.instance.groupID = id;
-    const componentNativeElement = component?.location.nativeElement;
+    try{
+      this.renderer.removeClass(this.previous, "selected");
+    } catch{}
+    
+    this.previous = groupDiv;
+    this.renderer.addClass(groupDiv, "selected");
   }
 }

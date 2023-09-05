@@ -12,7 +12,7 @@ module.exports = function(req, res) {
         let users = JSON.parse(data);
 
         for (let user of users) {
-            if (username == user.username && password == user.password) {
+            if (username.toLowerCase() == user.username.toLowerCase() && password == user.password) {
                 valid = true;
                 response = {
                     valid: true,
