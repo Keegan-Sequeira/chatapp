@@ -18,3 +18,7 @@
 .channel button{
     width: 20%;
 }
+
+button{
+    border-radius: 0;
+}

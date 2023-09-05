@@ -37,6 +37,8 @@ app.post("/api/groups/info", require("./routes/groupinfo"));
 
 app.post("/api/groups/channel/create", require("./routes/createchannel"));
 
+app.post("/api/groups/channel/delete", require("./routes/deletechannel")); 
+
 app.get("/api/user/list", require("./routes/allusers"));
 
 app.post("/api/user/promote", require("./routes/promote"));

@@ -21,13 +21,10 @@ export class GroupComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id']; 
-      console.log(this.id);
 
       this.api.apiPost("/api/groups/info", {id: this.id})
       .subscribe( (data: any) => {
         this.group = data;
-        console.log(data);
-        console.log(this.group)
       });      
    });
   }
@@ -39,6 +36,18 @@ export class GroupComponent implements OnInit {
         alert("Channel Created Successfully.");
       } else {
         alert("There was an error creating channel.");
+      }
+      window.location.reload();
+    });
+  }
+  
+  deleteChannel(channel: string){
+    this.api.apiPost("/api/groups/channel/delete", {groupID: this.id, "channel": channel})
+    .subscribe( (data:any) => {
+      if (data.successful == true){
+        alert("Channel Deleted Successfully.")
+      } else {
+        alert("There was an error deleting channel.")
       }
       window.location.reload();
     });

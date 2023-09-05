@@ -10,7 +10,7 @@
     <ul class="list-group">
         <div *ngFor="let channel of group.channels" class="channel">
             <li class="list-group-item">{{channel}}</li>
-            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-danger" (click)="deleteChannel(channel)">Delete</button>
         </div>
     </ul>
 
