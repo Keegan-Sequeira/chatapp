@@ -70,4 +70,16 @@ export class GroupComponent implements OnInit {
     });
   }
 
+  removeUser(user: string){
+    this.api.apiPost("/api/groups/removeuser", {username: user, groupID: this.id})
+    .subscribe (( data: any) => {
+      if (data.successful == true){
+        alert("User Removed from Group.")
+      } else {
+        alert("There was an error removing user.");
+      }
+      window.location.reload();
+    })
+  }
+
 }

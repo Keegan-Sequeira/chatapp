@@ -29,7 +29,7 @@
     <ul class="list-group">
         <div *ngFor="let user of users.in" class="channel">
             <li class="list-group-item">{{user}}</li>
-            <button class="btn btn-danger" >Remove</button>
+            <button (click)="removeUser(user)" class="btn btn-danger" >Remove</button>
         </div>
 
         <div *ngFor="let user of users.out" class="channel">
