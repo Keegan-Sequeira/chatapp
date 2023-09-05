@@ -73,7 +73,7 @@ export class SignupComponent implements OnInit{
           localStorage.setItem("highestRole", data.roles[0].toString());
           this.router.navigate(["/"]);
         } else {
-          console.log("there was an error");
+          alert("Username already exists.");
         }
       });
 
