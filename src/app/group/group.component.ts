@@ -16,6 +16,10 @@ export class GroupComponent implements OnInit {
     name: null,
     channels: []
   }
+  users = {
+    in: [],
+    out: []
+  }
 
   constructor(private route: ActivatedRoute, private api: ApiService, private router: Router) {}
 
@@ -33,8 +37,13 @@ export class GroupComponent implements OnInit {
       this.api.apiPost("/api/groups/info", {id: this.id})
       .subscribe( (data: any) => {
         this.group = data;
-      });      
-   });
+      });
+      
+      this.api.apiPost("/api/groups/getusers", {groupID: this.id})
+      .subscribe( (data: any) => {
+        this.users = data;
+      });
+    });
   }
 
   newChannel(){

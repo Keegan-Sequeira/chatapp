@@ -28,7 +28,7 @@ export class GroupManagerComponent implements OnInit{
     getGroups = JSON.parse(getGroups);
     this.userId = localStorage.getItem("id");
     
-    this.api.apiPost("/api/groups/user", {groups: getGroups})
+    this.api.apiPost("/api/user/groups", {groups: getGroups})
     .subscribe( (data: any) =>{
       this.groups = data.groups;
     });

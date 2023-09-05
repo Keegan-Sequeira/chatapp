@@ -4,7 +4,7 @@
     <h2>{{group.name}}</h2>
 
     <p>
-        Manage group here.
+        Add or remove channels.
     </p>
 
     <ul class="list-group">
@@ -22,5 +22,20 @@
             </div>
         </div>
     </form>
+
+    <br><br>
+    <p>Add or remove users to group.</p>
+
+    <ul class="list-group">
+        <div *ngFor="let user of users.in" class="channel">
+            <li class="list-group-item">{{user}}</li>
+            <button class="btn btn-danger" >Remove</button>
+        </div>
+
+        <div *ngFor="let user of users.out" class="channel">
+            <li class="list-group-item">{{user}}</li>
+            <button class="btn btn-success" >Add</button>
+        </div>
+    </ul>
 
 </div>

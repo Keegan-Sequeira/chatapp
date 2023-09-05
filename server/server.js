@@ -29,7 +29,7 @@ app.post("/api/signup", require("./routes/signup"));
 
 app.post("/api/user/info", require("./routes/userinfo"));
 
-app.post("/api/groups/user", require("./routes/usergroups"));
+app.post("/api/user/groups", require("./routes/usergroups"));
 
 app.post("/api/groups/create", require("./routes/newgroup"));
 
@@ -42,3 +42,5 @@ app.post("/api/groups/channel/delete", require("./routes/deletechannel"));
 app.get("/api/user/list", require("./routes/allusers"));
 
 app.post("/api/user/promote", require("./routes/promote"));
+
+app.post("/api/groups/getusers", require("./routes/groupusers"));;
