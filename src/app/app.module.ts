@@ -15,6 +15,7 @@ import { GroupManagerComponent } from './group-manager/group-manager.component';
 import { GroupComponent } from './group/group.component';
 import { ChatComponent } from './chat/chat.component';
 import { UserManagerComponent } from './user-manager/user-manager.component';
+import { ChannelsComponent } from './chat/channels/channels.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { UserManagerComponent } from './user-manager/user-manager.component';
     GroupManagerComponent,
     GroupComponent,
     ChatComponent,
-    UserManagerComponent
+    UserManagerComponent,
+    ChannelsComponent
   ],
   imports: [
     BrowserModule,

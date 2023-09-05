@@ -17,18 +17,8 @@
     cursor: pointer;
 }
 
-.channels{
-    width: 20%;
-}
-
-.channel {
-    padding-top: 1em;
-    padding-bottom: 1em;
-}
-
-.channel:hover {
-    background-color: lightblue;
-    cursor: pointer;
+#channels {
+    width: 0;
 }
 
 .chat{

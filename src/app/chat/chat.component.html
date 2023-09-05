@@ -1,18 +1,14 @@
 <div class="main-content">
 
     <div class="groups">
-        <div class="group">Group 1</div>
-        <div class="group">Group 1</div>
-        <div class="group">Group 1</div>
-        <div class="group">Group 1</div>
+        <div (click)="showChannels(group.id)" *ngFor="let group of groups" class="group">{{group.name}}</div>
     </div>
     
-    <div class="channels">
-        <div class="channel">Channel 1</div>
-        <div class="channel">Channel 1</div>
-        <div class="channel">Channel 1</div>
-        <div class="channel">Channel 1</div>
-    </div>
+    <span #channelContainer id="channels">
+
+    </span>
+    <!-- <app-channels class="channels" [groupID] = 2></app-channels> -->
+
     
     <div class="chat">
         <div class="video">
