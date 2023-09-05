@@ -79,7 +79,21 @@ export class GroupComponent implements OnInit {
         alert("There was an error removing user.");
       }
       window.location.reload();
-    })
-  }
+    });
+  };
+
+  addUser(user: string){
+    this.api.apiPost("/api/groups/adduser", {username: user, groupID: this.id})
+    .subscribe (( data: any) => {
+      if (data.successful == true){
+        alert("User Added to Group.")
+      } else {
+        alert("There was an error adding user.");
+      }
+      window.location.reload();
+    });
+  };
+
+ 
 
 }

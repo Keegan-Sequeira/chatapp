@@ -47,4 +47,4 @@ app.post("/api/groups/getusers", require("./routes/groupusers"));;
 
 app.post("/api/groups/removeuser", require("./routes/groupremoveuser"));
 
-app.post("/api/groups/adduser");
+app.post("/api/groups/adduser", require("./routes/groupadduser"));

@@ -34,7 +34,7 @@
 
         <div *ngFor="let user of users.out" class="channel">
             <li class="list-group-item">{{user}}</li>
-            <button class="btn btn-success" >Add</button>
+            <button (click)="addUser(user)" class="btn btn-success" >Add</button>
         </div>
     </ul>
 
