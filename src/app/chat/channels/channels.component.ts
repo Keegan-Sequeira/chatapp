@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, Output, EventEmitter } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ChannelsComponent implements OnInit{
   @Input() groupID = 0;
+  @Output() selectedChannel = new EventEmitter<string>();
   group = {
     name: null,
     channels: []
@@ -33,5 +34,7 @@ export class ChannelsComponent implements OnInit{
     } catch{}
 
     this.previous = channelDiv;
+
+    this.selectedChannel.emit(channel);
   }
 }
