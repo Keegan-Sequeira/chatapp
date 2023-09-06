@@ -28,7 +28,7 @@ module.exports = function(req, res) {
                 "password": password,
                 "email": email,
                 "roles": ["US"],
-                "groups": ["open"]
+                "groups": [1]
             };
         
             existingJSON.push(newUser);
