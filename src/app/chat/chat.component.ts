@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef, ViewChild, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewChild, Renderer2, ElementRef } from '@angular/core';
 import { Router } from "@angular/router";
 import { ApiService } from '../services/api.service';
 import { ChannelsComponent } from './channels/channels.component';
@@ -15,8 +15,8 @@ export class ChatComponent implements OnInit{
   previous: any = null;
   constructor (private router: Router, private api: ApiService, private vcr: ViewContainerRef, private renderer: Renderer2) {}
 
-  //@ViewChild("channelContainer") channelContainer?: ViewContainerRef;
-  @ViewChild('channelContainer', {read: ViewContainerRef}) channelContainer?: ViewContainerRef;
+  @ViewChild('channelContainer', {read: ViewContainerRef}) channelContainer!: ViewContainerRef;
+  @ViewChild('divContainer') divContainer!: ElementRef;
 
   ngOnInit() {
     let loggedIn = localStorage.getItem("valid");
@@ -34,9 +34,11 @@ export class ChatComponent implements OnInit{
   }
 
   showChannels(id: any, groupDiv: any){
-    this.channelContainer?.clear();
-    const component = this.channelContainer?.createComponent(ChannelsComponent);
-    component!.instance.groupID = id;
+    this.channelContainer.clear();
+    const component = this.channelContainer.createComponent(ChannelsComponent);
+    //this.renderer.removeClass(this.divContainer, "hide");
+    this.divContainer.nativeElement.setAttribute("class", "channels show");
+    component.instance.groupID = id;
     try{
       this.renderer.removeClass(this.previous, "selected");
     } catch{}

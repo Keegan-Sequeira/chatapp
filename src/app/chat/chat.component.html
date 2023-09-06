@@ -4,9 +4,10 @@
         <div (click)="showChannels(group.id, $event.target)" *ngFor="let group of groups" class="group">{{group.name}}</div>
     </div>
     
-    <span #channelContainer id="channels">
-
-    </span>
+    <div class="channels" #divContainer>
+        <ng-template #channelContainer ></ng-template>
+    </div>
+    
     <!-- <app-channels class="channels" [groupID] = 2></app-channels> -->
 
     

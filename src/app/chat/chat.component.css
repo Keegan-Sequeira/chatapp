@@ -4,7 +4,7 @@
 }
 
 .groups{
-    width: 25%;
+    width: 20%;
 }
 
 .group {
@@ -17,8 +17,9 @@
     cursor: pointer;
 }
 
-#channels {
-    width: 0;
+.channels {
+    width: 20%;
+    display: none;
 }
 
 .chat{
@@ -42,4 +43,8 @@
     background-color: var(--bs-primary);
     color: white;
     text-decoration: underline;
+}
+
+.show{
+    display: block;
 }
