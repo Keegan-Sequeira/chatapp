@@ -36,7 +36,6 @@ export class ChatComponent implements OnInit{
   showChannels(id: any, groupDiv: any){
     this.channelContainer.clear();
     const component = this.channelContainer.createComponent(ChannelsComponent);
-    //this.renderer.removeClass(this.divContainer, "hide");
     this.divContainer.nativeElement.setAttribute("class", "channels show");
     component.instance.groupID = id;
     try{

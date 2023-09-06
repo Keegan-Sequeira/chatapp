@@ -9,3 +9,9 @@
     background-color: lightblue;
     cursor: pointer;
 }
+
+.selected{
+    background-color: var(--bs-primary);
+    color: white;
+    text-decoration: underline;
+}

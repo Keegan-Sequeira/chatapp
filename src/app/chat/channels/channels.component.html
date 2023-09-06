@@ -1,4 +1,4 @@
 
-<div *ngFor="let channel of group.channels" class="channel">{{channel}}</div>
+<div *ngFor="let channel of group.channels" class="channel" (click)="selectChannel(channel, $event.target)">{{channel}}</div>
 
 

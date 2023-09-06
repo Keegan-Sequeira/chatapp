@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -12,8 +12,9 @@ export class ChannelsComponent implements OnInit{
     name: null,
     channels: []
   }
+  previous: any = null;
 
-  constructor (private api: ApiService) {}
+  constructor (private api: ApiService, private renderer: Renderer2) {}
 
   ngOnInit() {
     
@@ -22,5 +23,15 @@ export class ChannelsComponent implements OnInit{
       this.group = data;
     });
 
+  }
+
+  selectChannel(channel: string, channelDiv: any){
+
+    this.renderer.addClass(channelDiv, "selected");
+    try {
+      this.renderer.removeClass(this.previous, "selected");
+    } catch{}
+
+    this.previous = channelDiv;
   }
 }
