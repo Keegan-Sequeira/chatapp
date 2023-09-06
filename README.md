@@ -20,6 +20,7 @@ An Angular application is built using components, services, and routes instead o
  - User Manager: Allows the logged in super admin to promote users to group admins, and group admins to super admins.
  - Chat: Displays the main page where the user can chat in the selected channel.
  - Channels: Allows the user to select a channel to join after joining the group.
+ - Talk: Once user selects a channel to join, the talk component is loaded, this is where the user can view and send messages, as well as see video.
 
 The following services are used in this Angular application:
 
