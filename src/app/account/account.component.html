@@ -1,0 +1,33 @@
+<div class="main-content">
+
+    <h2>User Profile</h2>
+    
+    <form>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input disabled type="text" class="form-control" id="username" value="{{username}}">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input disabled type="text" class="form-control" id="email" value="{{email}}">
+        </div>
+
+        <div class="form-group">
+            <label for="role">Role:</label>
+            <input disabled type="text" class="form-control" id="role" value="{{role}}">
+        </div>
+
+        <div class="form-group">
+            <label for="groups">Enrolled Groups:</label>
+            <select disabled multiple class="form-control" id="groups">
+                <option *ngFor="let group of groups">{{group.name}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="picture">Profile Picture:</label>
+        </div>
+
+    </form>
+</div>
