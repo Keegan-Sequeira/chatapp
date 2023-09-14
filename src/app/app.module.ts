@@ -17,6 +17,7 @@ import { ChatComponent } from './chat/chat.component';
 import { UserManagerComponent } from './user-manager/user-manager.component';
 import { ChannelsComponent } from './chat/channels/channels.component';
 import { TalkComponent } from './chat/talk/talk.component';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { TalkComponent } from './chat/talk/talk.component';
     ChatComponent,
     UserManagerComponent,
     ChannelsComponent,
-    TalkComponent
+    TalkComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,

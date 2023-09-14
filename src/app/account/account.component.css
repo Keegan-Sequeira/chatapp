@@ -1,0 +1,16 @@
+.main-content{
+    width: 50%;
+    margin-top: 2em;
+    margin-left: 25%;
+}
+
+.form-group{
+    padding-top: 1em;
+    
+}
+
+.profile-image{
+    margin-top: 1em;
+    margin-bottom: 2em;
+    height: 10em;
+}
