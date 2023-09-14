@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const path = require("path");
 const http = require("http").Server(app);
 const io = require("socket.io") (http, {
     cors: {
@@ -22,6 +23,8 @@ app.use(cors());
 sockets.connect(io, PORT);
 
 server.listen(http, PORT);
+
+app.use('/images',express.static(path.join(__dirname , './uploadedImages')));
 
 app.post("/api/auth/login", require("./routes/postLogin"));
 
@@ -48,3 +51,5 @@ app.post("/api/groups/getusers", require("./routes/groupusers"));;
 app.post("/api/groups/removeuser", require("./routes/groupremoveuser"));
 
 app.post("/api/groups/adduser", require("./routes/groupadduser"));
+
+app.post("/api/image/upload", require("./routes/imgupload"));

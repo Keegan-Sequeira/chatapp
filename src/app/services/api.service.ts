@@ -23,4 +23,8 @@ export class ApiService {
   apiGet(url: string){
     return this.httpClient.get(BACKEND_URL+url, headerOptions);
   }
+
+  imgUpload(fd: any){
+    return this.httpClient.post<any>(BACKEND_URL + "/api/image/upload", fd);
+  }
 }
