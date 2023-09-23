@@ -36,6 +36,8 @@ const client = new MongoClient(URL, { useNewUrlParser: true, useUnifiedTopology:
 
         app.use('/images',express.static(path.join(__dirname , './uploadedImages')));
 
+        app.get("/test", require("./routes/testroute"));
+
         app.post("/api/auth/login", require("./routes/postLogin"));
 
         app.post("/api/signup", require("./routes/signup"));
@@ -63,7 +65,7 @@ const client = new MongoClient(URL, { useNewUrlParser: true, useUnifiedTopology:
         app.post("/api/groups/adduser", require("./routes/groupadduser"));
         
         app.post("/api/image/upload", require("./routes/imgupload"));
-        
+
     } catch (error) {
         console.error("Error connecting to MongoDB: ", error);
     }
