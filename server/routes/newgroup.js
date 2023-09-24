@@ -1,52 +1,49 @@
 const fs = require("fs");
 
-function addToUsers(user, newId){
-    fs.readFile("./data/users.json", "utf8", function(err, data){
-        let existingJson = JSON.parse(data);
-
-        existingJson[0].groups.push(newId);
-
-        for (let i of existingJson){
-            if (i.id == user) {
-                i.groups.push(newId);
-            }
-        }
-
-        let jsonString = JSON.stringify(existingJson);
-
-        fs.writeFile("./data/users.json", jsonString, function(err, data){
-            console.log("Added group to users");
-        })
-    });
-};
-
-module.exports = function(req, res){
+module.exports = async(req, res) => {
     let name = req.body.name;
     let user = req.body.userId;
 
-    fs.readFile("./data/groups.json", "utf8", function(err, data){
-        let existingJson = JSON.parse(data);
+    const mongoClient = req.app.get("mongoClient");
+    const db = mongoClient.db("chatapp");
+    const collection = db.collection("groups");
 
-        let groupId = existingJson.length + 1;
-
-        let newGroup = {
-            "id": groupId,
-            "name": name,
-            "channels": []
-        };
-
-        existingJson.push(newGroup);
-
-        let jsonString = JSON.stringify(existingJson);
-
-        fs.writeFile("./data/groups.json", jsonString, err => {
-            if (err){
-                console.log(err);
-                res.send({successful: false});
-            } else {
-                addToUsers(user, groupId);
-                res.send({successful: true});
+    const topID = await collection.aggregate([
+        {
+            "$sort": {"id": -1}
+        },
+        {
+            "$limit": 1
+        },
+        {
+            "$project": {
+                "_id": 0,
+                "id": 1
             }
-        });
-    });
+        }
+    ]).toArray();
+    const newID = topID[0].id + 1;
+
+    const newGroup = {
+        "id": newID,
+        "name": name,
+        "channels": []
+    }
+    
+    const result = await collection.insertOne(newGroup);
+
+    if (result.acknowledged == true) {
+        const userCollection = db.collection("users");
+        const updateResult = await userCollection.updateMany({"$or": [{"roles": "SA"}, {"id": parseInt(user)}]}, {"$push": {"groups": newID}});
+
+        if (updateResult.acknowledged == true)
+        {
+            res.send({successful: true});
+        } else {
+            res.send({successful: false});
+        }
+        
+    } else {
+        res.send({successful: false});
+    }
 };

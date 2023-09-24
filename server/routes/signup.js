@@ -47,7 +47,6 @@ module.exports = async(req, res) => {
         };
 
         const result = await collection.insertOne(newUser);
-        console.log(result);
 
         if (result.acknowledged == true) {
             res.send(response);
