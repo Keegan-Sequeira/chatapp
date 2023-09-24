@@ -36,8 +36,6 @@ const client = new MongoClient(URL, { useNewUrlParser: true, useUnifiedTopology:
 
         app.use('/images',express.static(path.join(__dirname , './uploadedImages')));
 
-        app.get("/test", require("./routes/testroute"));
-
         app.post("/api/auth/login", require("./routes/postLogin"));
 
         app.post("/api/signup", require("./routes/signup"));
