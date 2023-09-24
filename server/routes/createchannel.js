@@ -1,21 +1,17 @@
-const fs = require("fs");
-
-module.exports = function(req, res){
+module.exports = async(req, res) => {
     let name = req.body.name;
     let group = req.body.groupID;
 
-    fs.readFile("./data/groups.json", "utf8", function(err, data){
-        let existingJson = JSON.parse(data);
-        existingJson[group-1].channels.push(name);
-        let jsonString = JSON.stringify(existingJson);
+    const mongoClient = req.app.get("mongoClient");
+    const db = mongoClient.db("chatapp");
+    const collection = db.collection("groups");
 
-        fs.writeFile("./data/groups.json", jsonString, err => {
-            if (err){
-                console.log(err);
-                res.send({successful: false});
-            } else {
-                res.send({successful: true});
-            }
-        });
-    });
+    const result = await collection.updateOne({"id": group}, {"$push": {"channels": name}});
+
+    if (result.acknowledged == true)
+    {
+        res.send({successful: true});
+    } else {
+        res.send({successful: false});
+    }
 };

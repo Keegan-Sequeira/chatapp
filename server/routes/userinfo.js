@@ -1,26 +1,21 @@
-const fs = require("fs");
-
-module.exports = function(req, res){
+module.exports = async(req, res) => {
     let id = req.body.id;
     let response;
 
-    fs.readFile("./data/users.json", "utf8", function(err, data){
-        let users = JSON.parse(data);
+    const mongoClient = req.app.get("mongoClient");
+    const db = mongoClient.db("chatapp");
+    const collection = db.collection("users");
 
-        for (let user of users){
-            if (user.id == id){
-                response = {
-                    valid: true,
-                    username: user.username,
-                    email: user.email,
-                    id: user.id,
-                    groups: user.groups,
-                    roles: user.roles
-                };
-                break;
-            }
-        }
+    const user = await collection.findOne({"id": parseInt(id)});
 
-        res.send(response);
-    });
+    response = {
+        valid: true,
+        username: user.username,
+        email: user.email,
+        id: user.id,
+        groups: user.groups,
+        roles: user.roles
+    };
+
+    res.send(response);
 };

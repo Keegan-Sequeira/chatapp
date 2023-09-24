@@ -1,23 +1,16 @@
-const fs = require("fs");
-
-module.exports = function(req, res){
+module.exports = async(req, res) => {
     let promoted = req.body.userID;
     let rank = req.body.rank;
-    fs.readFile("./data/users.json", "utf8", function(err, data){
-        let users = JSON.parse(data);
 
-        users[promoted-1].roles.splice(0, 0, rank);
+    const mongoClient = req.app.get("mongoClient");
+    const db = mongoClient.db("chatapp");
+    const collection = db.collection("users");
 
-        let jsonString = JSON.stringify(users);
+    const result = await collection.updateOne({"id": parseInt(promoted)}, {"$push": {"roles": {"$each": [rank], "$position": 0}}});
 
-        fs.writeFile("./data/users.json", jsonString, err => {
-            if (err){
-                console.log(err);
-                res.send({successful: false});
-            } else {
-                res.send({successful: true});
-            }
-        });
-
-    });
+    if (result.acknowledged == true)  {
+        res.send({successful: true});
+    } else {
+        res.send({successful: false});
+    }
 };

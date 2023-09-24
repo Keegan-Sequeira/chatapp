@@ -1,18 +1,11 @@
-const fs = require("fs");
-
-module.exports = function(req, res){
+module.exports = async(req, res) => {
     let groupID = req.body.id;
-    let returnGroup;
 
-    fs.readFile("./data/groups.json", "utf8", function(err, data){
-        let groups = JSON.parse(data);
+    const mongoClient = req.app.get("mongoClient");
+    const db = mongoClient.db("chatapp");
+    const collection = db.collection("groups");
 
-        for (let group of groups){
-            if (group.id == groupID){
-                returnGroup = group;
-                break;
-            }
-        }
-        res.send(returnGroup);
-    })
+    const returnGroup = await collection.findOne({"id": groupID});
+
+    res.send(returnGroup);
 };
