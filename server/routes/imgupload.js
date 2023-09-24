@@ -10,7 +10,8 @@ module.exports = function(req, res){
 
     form.parse(req, async (err, fields, files) => {
         let oldpath = files.image[0].filepath;
-        let newpath = form.uploadDir + "/" + files.image[0].originalFilename;
+        const type = files.image[0].mimetype.split("/")[1];
+        let newpath = files.image[0].filepath + "." + type;
 
         fs.rename(oldpath, newpath, function(err){
             if (err) {
@@ -26,7 +27,7 @@ module.exports = function(req, res){
 
         res.send({
             result: "OK",
-            data: {"filename": files.image[0].originalFilename, "size": files.image[0].size},
+            data: {"filename": files.image[0].newFilename + "." + type, "size": files.image[0].size},
             numberOfImages: 1,
             message: "Upload successful"
         });
