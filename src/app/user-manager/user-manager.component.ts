@@ -41,4 +41,16 @@ export class UserManagerComponent implements OnInit{
     });
   }
 
+  demote(user: any) {
+    this.api.apiPost("/api/user/demote", {userID: user})
+    .subscribe( (data: any) => {
+      if (data.successful == true){
+        alert("User Modified");
+      } else {
+        alert("Error. Try Again Later.");
+      }
+      window.location.reload();
+    });
+  }
+
 }
