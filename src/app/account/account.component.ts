@@ -15,6 +15,7 @@ export class AccountComponent implements OnInit {
   selectedFile: any = null;
   imgpath: string = "";
   groups = [{name: null, id: null}];
+  userID: string = "";
 
   constructor (private router: Router, private api: ApiService) {}
 
@@ -27,6 +28,7 @@ export class AccountComponent implements OnInit {
     this.username = localStorage.getItem("username") ?? "";
     this.email = localStorage.getItem("email") ?? "";
     this.role = localStorage.getItem("highestRole") ?? "";
+    this.userID = localStorage.getItem("id") ?? "";
 
     let groupList = JSON.parse(localStorage.getItem("groups") ?? "");
 
@@ -43,9 +45,15 @@ export class AccountComponent implements OnInit {
   updateProfile(){
     const fd = new FormData();
     fd.append("image", this.selectedFile, this.selectedFile.name);
+    fd.append("userID", this.userID);
+    console.log(fd);
     this.api.imgUpload(fd).subscribe(res => {
-      this.imgpath = res.data.filename;
-      console.log(res);
+      if (res.data.result == "OK") {
+        this.imgpath = res.data.filename;
+      } else {
+        alert("There was an error uploading image. Please try again later.")
+      }
+      
     });
   }
 }
