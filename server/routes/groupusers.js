@@ -1,22 +1,23 @@
-const fs = require("fs");
-
-module.exports = function(req, res){
+module.exports = async(req, res) => {
     let groupID = req.body.groupID;
 
-    fs.readFile("./data/users.json", "utf8", function(err, data){
-        let users = JSON.parse(data);
+    const mongoClient = req.app.get("mongoClient");
+    const db = mongoClient.db("chatapp");
+    const collection = db.collection("users");
 
-        let inGroup = [];
-        let notGroup = [];
+    const users = await collection.find({}).toArray();
 
-        for (let user of users){
-            if (user.groups.includes(groupID) && user.roles[0] != "SA"){
-                inGroup.push(user.username);
-            } else if (user.roles[0] != "SA"){
-                notGroup.push(user.username);
-            }
+    let inGroup = [];
+    let notGroup = [];
+
+    for (let user of users){
+        if (user.groups.includes(groupID) && user.roles[0] != "SA"){
+            inGroup.push(user.username);
+        } else if (user.roles[0] != "SA"){
+            notGroup.push(user.username);
         }
+    }
 
-        res.send({in: inGroup, out: notGroup});
-    });
+    res.send({in: inGroup, out: notGroup});
+
 }

@@ -1,37 +1,17 @@
-const fs = require("fs");
-
-module.exports = function(req, res){
+module.exports = async(req, res) => {
     let username = req.body.username;
     let groupID = req.body.groupID;
 
-    fs.readFile("./data/users.json", "utf8", function(err, data){
-        let existingJson = JSON.parse(data);
-        let existingUser;
-        let removeUser;
+    const mongoClient = req.app.get("mongoClient");
+    const db = mongoClient.db("chatapp");
+    const collection = db.collection("users");
+    
+    result = await collection.updateOne({"username": username}, {"$push": {"groups": groupID}});
 
-        for (let i = 0; i < existingJson.length; i++){
-            if (existingJson[i].username == username){
-                existingUser = existingJson[i];
-                removeUser = i;
-                break;
-            }
-        }
-
-        existingUser.groups.push(groupID);
-
-        existingJson[removeUser] = existingUser;
-        let jsonString = JSON.stringify(existingJson);
-
-        fs.writeFile("./data/users.json", jsonString, err => {
-            if (err){
-                console.log(err);
-                res.send({successful: false});
-            } else {
-                res.send({successful: true});
-            }
-        });
-
-        
-    });
-
+    if (result.acknowledged == true)
+    {
+        res.send({successful: true});
+    } else {
+        res.send({successful: false});
+    }
 };

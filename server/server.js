@@ -58,7 +58,7 @@ const client = new MongoClient(URL, { useNewUrlParser: true, useUnifiedTopology:
 
         app.post("/api/user/demote", require("./routes/demote"));
         
-        app.post("/api/groups/getusers", require("./routes/groupusers"));;
+        app.post("/api/groups/getusers", require("./routes/groupusers"));
         
         app.post("/api/groups/removeuser", require("./routes/groupremoveuser"));
         
