@@ -12,3 +12,17 @@
     font-style: italic;
     color: var(--bs-primary);
 }
+
+.profile-picture {
+    max-width: 3em;
+    max-height: 3em;
+    width: auto;
+    height: auto;
+    margin-right: 1em;
+}
+
+.message{
+    padding-top: 0.1em;
+    padding-left: 1em;
+    border-bottom: darkgray solid 1px;
+}

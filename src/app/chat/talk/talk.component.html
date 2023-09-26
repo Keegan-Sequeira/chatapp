@@ -5,8 +5,15 @@
 
 </div>
 
+<ng-template #hasPicture>
+  <img class="profile-picture" src="assets/images/default-user.jpg">
+</ng-template>
+
 <div class="text">
-    <div *ngFor="let m of messages" class="message"><span class="username">{{m.username}}:</span> {{m.message}}</div>
+    <div *ngFor="let m of messages" class="message">
+      <img *ngIf="m.photo != 'undefined'; else hasPicture" class="profile-picture" src="http://localhost:3000\images\{{m.photo}}">
+      <span class="username">{{m.username}}:</span> {{m.message}}
+    </div>
 
 </div>
 
