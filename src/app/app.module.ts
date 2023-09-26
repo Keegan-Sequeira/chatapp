@@ -18,6 +18,7 @@ import { UserManagerComponent } from './user-manager/user-manager.component';
 import { ChannelsComponent } from './chat/channels/channels.component';
 import { TalkComponent } from './chat/talk/talk.component';
 import { AccountComponent } from './account/account.component';
+import { SocketService } from './services/socket.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { AccountComponent } from './account/account.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
