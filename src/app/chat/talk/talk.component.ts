@@ -32,7 +32,7 @@ export class TalkComponent implements OnInit{
   }
 
   private initIoConnection(){
-    this.socketService.initSocket();
+    this.socketService.initSocket(this.channel);
     this.ioConnection = this.socketService.getMessage()
     .subscribe((data: any) => {
       this.messages.push(data);

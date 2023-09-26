@@ -13,8 +13,9 @@ export class SocketService {
   constructor() { }
 
   // Set up connection to socket server
-  initSocket(){
+  initSocket(channel: string){
     this.socket = io(SERVER_URL);
+    this.socket.emit("joinChannel", channel);
     return ()=>{this.socket.disconnect();}
   }
 
