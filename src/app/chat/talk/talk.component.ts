@@ -22,21 +22,28 @@ export class TalkComponent implements OnInit{
   messages: MessageData[] = [];
   username: string = "";
   picture: string = "";
+  joinedUsers: any;
+  notifications: string[] = [];
 
   constructor(private socketService: SocketService) {}
 
   ngOnInit(){
-    this.initIoConnection();
     this.username = localStorage.getItem("username") ?? "";
     this.picture = localStorage.getItem("picture") ?? "";
+    this.initIoConnection();
   }
 
   private initIoConnection(){
-    this.socketService.initSocket(this.channel);
+    this.socketService.initSocket(this.channel, this.username);
     this.ioConnection = this.socketService.getMessage()
     .subscribe((data: any) => {
       this.messages.push(data);
       console.log(data);
+    });
+
+    this.joinedUsers = this.socketService.userJoined()
+    .subscribe((data: any) => {
+      this.notifications.push(data);
     });
   }
 

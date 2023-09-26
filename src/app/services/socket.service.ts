@@ -13,9 +13,9 @@ export class SocketService {
   constructor() { }
 
   // Set up connection to socket server
-  initSocket(channel: string){
+  initSocket(channel: string, username: string){
     this.socket = io(SERVER_URL);
-    this.socket.emit("joinChannel", channel);
+    this.socket.emit("joinChannel", channel, username);
     return ()=>{this.socket.disconnect();}
   }
 
@@ -28,6 +28,11 @@ export class SocketService {
   getMessage(){
     return new Observable(observer => {
       this.socket.on("message", (data: any) => {observer.next(data)});
+    })
+  }
+  userJoined(){
+    return new Observable(observer => {
+      this.socket.on("joined", (data: any) => {observer.next(data)});
     })
   }
 }

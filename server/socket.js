@@ -4,9 +4,10 @@ module.exports = {
 
             let joinedChannel;
 
-            socket.on("joinChannel", (channel) => {
+            socket.on("joinChannel", (channel, username) => {
                 socket.join(channel);
                 console.log(`User connection on port ${PORT} : ${socket.id}. Channel: ${channel}`);
+                io.to(channel).emit("joined", `${username} has joined the channel.`)
                 joinedChannel = channel;
             })
 
