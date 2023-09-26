@@ -30,9 +30,14 @@ export class SocketService {
       this.socket.on("message", (data: any) => {observer.next(data)});
     })
   }
-  userJoined(){
+  
+  notification(){
     return new Observable(observer => {
-      this.socket.on("joined", (data: any) => {observer.next(data)});
+      this.socket.on("notification", (data: any) => {observer.next(data)});
     })
+  }
+
+  userLeft(username: string){
+    this.socket.emit("left", username);
   }
 }

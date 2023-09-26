@@ -22,7 +22,7 @@ export class TalkComponent implements OnInit{
   messages: MessageData[] = [];
   username: string = "";
   picture: string = "";
-  joinedUsers: any;
+  notification: any;
   notifications: string[] = [];
 
   constructor(private socketService: SocketService) {}
@@ -41,7 +41,7 @@ export class TalkComponent implements OnInit{
       console.log(data);
     });
 
-    this.joinedUsers = this.socketService.userJoined()
+    this.notification = this.socketService.notification()
     .subscribe((data: any) => {
       this.notifications.push(data);
     });
@@ -54,5 +54,9 @@ export class TalkComponent implements OnInit{
     } else {
       
     }
+  }
+
+  ngOnDestroy(){
+    this.socketService.userLeft(this.username);
   }
 }
