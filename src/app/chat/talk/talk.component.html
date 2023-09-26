@@ -6,7 +6,7 @@
 </div>
 
 <div class="text">
-    <div *ngFor="let m of messages" class="message">{{m}}</div>
+    <div *ngFor="let m of messages" class="message"><span class="username">{{m.username}}:</span> {{m.message}}</div>
 
 </div>
 

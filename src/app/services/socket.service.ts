@@ -19,8 +19,8 @@ export class SocketService {
   }
 
   //Emit a message to the socket server
-  send(message: string) {
-    this.socket.emit("message", message);
+  send(message: string, username: string, photo: string) {
+    this.socket.emit("message", message, username, photo);
   }
 
   //Listen for a message
