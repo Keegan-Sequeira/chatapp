@@ -43,7 +43,8 @@ module.exports = async(req, res) => {
             email: newUser.email,
             id: newUser.id,
             groups: newUser.groups,
-            roles: newUser.roles
+            roles: newUser.roles,
+            picture: newUser.photo
         };
 
         const result = await collection.insertOne(newUser);
