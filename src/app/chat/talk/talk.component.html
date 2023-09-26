@@ -24,13 +24,18 @@
 
 </div>
 
-
-
 <form>
     <div class="input-group">
-        <input id="messageContent" name="messageContent" type="text" class="form-control" placeholder="Message..."  [(ngModel)]="messageContent">
-        <div class="input-group-append">
-          <button class="btn btn-outline-primary" type="button" (click)="send()">Send</button>
-        </div>
+      <input id="messageContent" name="messageContent" type="text" class="form-control" placeholder="Message..."  [(ngModel)]="messageContent">
+      <div class="input-group-append">
+        <button class="btn btn-outline-primary" type="button" (click)="send()">Send</button>
       </div>
+    </div>
+    <br>
+    <div class="input-group">
+      <input class="form-control" type="file" id="formFile" accept="image/*">
+      <div class="input-group-append">
+        <button class="btn btn-outline-primary" type="button" (click)="sendImage()">Send Image</button>
+      </div>
+    </div>
 </form>

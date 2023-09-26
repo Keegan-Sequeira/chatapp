@@ -27,7 +27,7 @@
 
         <div class="form-group">
             <label for="picture">Profile Picture:</label>
-            <input type="file" class="form-control" (change)="onFileSelected($event)" name="uploadfile" id = "uploadfile" />
+            <input type="file" class="form-control" (change)="onFileSelected($event)" name="uploadfile" id = "uploadfile" accept="image/*"/>
 
             <img *ngIf="imgpath" class="profile-image" src="http://localhost:3000\images\{{imgpath}}"/>
         </div>

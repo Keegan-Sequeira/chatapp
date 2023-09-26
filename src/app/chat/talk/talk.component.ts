@@ -59,4 +59,8 @@ export class TalkComponent implements OnInit{
   ngOnDestroy(){
     this.socketService.userLeft(this.username);
   }
+
+  sendImage(){
+    
+  }
 }
