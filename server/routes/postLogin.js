@@ -21,7 +21,8 @@ module.exports = async(req, res) => {
                 email: user.email,
                 id: user.id,
                 groups: user.groups,
-                roles: user.roles
+                roles: user.roles,
+                picture: user.photo
             };
             break;
         }

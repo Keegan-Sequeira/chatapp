@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit{
         localStorage.setItem("id", data.id.toString());
         localStorage.setItem("groups", JSON.stringify(data.groups));
         localStorage.setItem("highestRole", data.roles[0].toString());
+        localStorage.setItem("picture", data.picture);
 
         this.router.navigate(["/"]);
       } else {

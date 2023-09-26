@@ -48,7 +48,7 @@ export class AccountComponent implements OnInit {
     fd.append("userID", this.userID);
     console.log(fd);
     this.api.imgUpload(fd).subscribe(res => {
-      if (res.data.result == "OK") {
+      if (res.result == "OK") {
         this.imgpath = res.data.filename;
       } else {
         alert("There was an error uploading image. Please try again later.")
