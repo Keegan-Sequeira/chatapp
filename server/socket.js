@@ -17,6 +17,7 @@ module.exports = {
 
             socket.on("left", (username) => {
                 io.to(joinedChannel).emit("notification", `${username} has left the channel.`);
+                socket.disconnect(0);
             })
         })
     }

@@ -38,7 +38,6 @@ export class TalkComponent implements OnInit{
     this.ioConnection = this.socketService.getMessage()
     .subscribe((data: any) => {
       this.messages.push(data);
-      console.log(data);
     });
 
     this.notification = this.socketService.notification()
