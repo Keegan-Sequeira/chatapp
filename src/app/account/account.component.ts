@@ -50,10 +50,10 @@ export class AccountComponent implements OnInit {
     this.api.imgUpload(fd).subscribe(res => {
       if (res.result == "OK") {
         this.imgpath = res.data.filename;
+        localStorage.setItem("picture", res.data.filename);
       } else {
         alert("There was an error uploading image. Please try again later.")
       }
-      
     });
   }
 }
