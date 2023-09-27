@@ -1,3 +1,5 @@
+let history = {};
+
 module.exports = {
     connect: function(io, PORT) {
         io.on("connection", (socket) => {
@@ -9,9 +11,16 @@ module.exports = {
                 console.log(`User connection on port ${PORT} : ${socket.id}. Channel: ${channel}`);
                 io.to(channel).emit("notification", `${username} has joined the channel.`);
                 joinedChannel = channel;
+
+                if (!history[channel]) {
+                    history[channel] = [];
+                }
             })
 
             socket.on("message", (message, username, photo) => {
+                console.log({message, username, photo});
+                history[joinedChannel].push({message, username, photo});
+                console.log(history);
                 io.to(joinedChannel).emit("message", {message, username, photo});
             })
 
