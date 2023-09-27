@@ -50,4 +50,10 @@ export class SocketService {
       this.socket.on("imageToClient", (data: any) => {observer.next(data)});
     })
   }
+
+  chatHistory(){
+    return new Observable(observer => {
+      this.socket.on("chatHistory", (data: any) => {observer.next(data)});
+    })
+  }
 }

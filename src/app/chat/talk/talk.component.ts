@@ -38,14 +38,13 @@ export class TalkComponent implements OnInit{
   @Input() channel = "";
   messageContent: string = "";
   ioConnection: any;
-  messages: MessageData[] = [];
   username: string = "";
   picture: string = "";
   notification: any;
   notifications: string[] = [];
   selectedFile: any = null;
   incomingFiles: any;
-
+  chatHistory: any;
   chatMessages: Chat[] = [];
 
   constructor(private socketService: SocketService) {}
@@ -60,7 +59,6 @@ export class TalkComponent implements OnInit{
     this.socketService.initSocket(this.channel, this.username);
     this.ioConnection = this.socketService.getMessage()
     .subscribe((data: any) => {
-      this.messages.push(data);
       this.chatMessages.push({username: data.username, photo: data.photo, type: "message", message: data.message});
     });
 
@@ -72,7 +70,13 @@ export class TalkComponent implements OnInit{
     this.incomingFiles = this.socketService.incomingImage()
     .subscribe( (data: any) => {
       this.chatMessages.push({username: data.username, photo: data.photo, type: "image", image: _arrayBufferToBase64(data.file), mimetype: data.mimetype});
-      console.log(this.chatMessages);
+    })
+
+    this.chatHistory = this.socketService.chatHistory()
+    .subscribe( (data: any) => {
+      for (let i of data) {
+        this.chatMessages.push({username: i.username, photo: i.photo, type: "message", message: i.message});
+      }
     })
   }
 

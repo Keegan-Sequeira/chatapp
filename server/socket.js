@@ -14,13 +14,18 @@ module.exports = {
 
                 if (!history[channel]) {
                     history[channel] = [];
+                } else {
+                    socket.emit("chatHistory", history[channel]);
                 }
+                
             })
 
             socket.on("message", (message, username, photo) => {
-                console.log({message, username, photo});
                 history[joinedChannel].push({message, username, photo});
-                console.log(history);
+
+                if (history[joinedChannel].length >= 5) {
+                    history[joinedChannel].shift()
+                }
                 io.to(joinedChannel).emit("message", {message, username, photo});
             })
 
