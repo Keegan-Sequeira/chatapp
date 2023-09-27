@@ -40,4 +40,14 @@ export class SocketService {
   userLeft(username: string){
     this.socket.emit("left", username);
   }
+
+  uploadImage(file: any, mimetype: string, username: string, photo: string) {
+    this.socket.emit("imageToServer", file, mimetype, username, photo);
+  }
+
+  incomingImage(){
+    return new Observable(observer => {
+      this.socket.on("imageToClient", (data: any) => {observer.next(data)});
+    })
+  }
 }

@@ -19,6 +19,10 @@ module.exports = {
                 io.to(joinedChannel).emit("notification", `${username} has left the channel.`);
                 socket.disconnect(0);
             })
+
+            socket.on("imageToServer", (file, mimetype, username, photo) => {
+                io.to(joinedChannel).emit("imageToClient", {file, mimetype, username, photo});
+            })
         })
     }
 }

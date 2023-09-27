@@ -7,6 +7,25 @@ interface MessageData {
   photo: string
 }
 
+interface Chat {
+  username: string,
+  photo: string,
+  type: string,
+  message?: string,
+  image?: string,
+  mimetype?: string
+}
+
+function _arrayBufferToBase64( buffer: ArrayBuffer ) {
+  var binary = '';
+  var bytes = new Uint8Array( buffer );
+  var len = bytes.byteLength;
+  for (var i = 0; i < len; i++) {
+     binary += String.fromCharCode( bytes[ i ] );
+  }
+  return window.btoa( binary );
+}
+
 
 @Component({
   selector: 'app-talk',
@@ -24,6 +43,10 @@ export class TalkComponent implements OnInit{
   picture: string = "";
   notification: any;
   notifications: string[] = [];
+  selectedFile: any = null;
+  incomingFiles: any;
+
+  chatMessages: Chat[] = [];
 
   constructor(private socketService: SocketService) {}
 
@@ -38,12 +61,19 @@ export class TalkComponent implements OnInit{
     this.ioConnection = this.socketService.getMessage()
     .subscribe((data: any) => {
       this.messages.push(data);
+      this.chatMessages.push({username: data.username, photo: data.photo, type: "message", message: data.message});
     });
 
     this.notification = this.socketService.notification()
     .subscribe((data: any) => {
       this.notifications.push(data);
     });
+
+    this.incomingFiles = this.socketService.incomingImage()
+    .subscribe( (data: any) => {
+      this.chatMessages.push({username: data.username, photo: data.photo, type: "image", image: _arrayBufferToBase64(data.file), mimetype: data.mimetype});
+      console.log(this.chatMessages);
+    })
   }
 
   send(){
@@ -59,7 +89,11 @@ export class TalkComponent implements OnInit{
     this.socketService.userLeft(this.username);
   }
 
+  onFileSelected(event: any){
+    this.selectedFile = event.target.files[0];
+  }
+
   sendImage(){
-    
+    this.socketService.uploadImage(this.selectedFile, this.selectedFile.type, this.username, this.picture);
   }
 }

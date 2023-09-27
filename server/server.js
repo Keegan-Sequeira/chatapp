@@ -8,7 +8,8 @@ const io = require("socket.io") (http, {
     cors: {
         origin: "http://localhost:4200",
         methods: ["GET", "POST"]
-    }
+    },
+    maxHttpBufferSize: 1e8
 });
 
 const sockets = require("./socket.js");

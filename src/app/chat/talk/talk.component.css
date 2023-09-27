@@ -33,3 +33,11 @@
     padding-left: 1em;
     border-bottom: darkgray solid 1px;
 }
+
+.imageMessage{
+    max-height: 5em;
+    max-width: 80%;
+    height: auto;
+    width: auto;
+    margin-left: 1em;
+}

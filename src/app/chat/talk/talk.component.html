@@ -11,10 +11,26 @@
 
 <div class="text-notifications">
   <div class="text">
-    <div *ngFor="let m of messages" class="message">
-      <img *ngIf="m.photo != 'undefined'; else hasPicture" class="profile-picture" src="http://localhost:3000\images\{{m.photo}}">
-      <span class="username">{{m.username}}:</span> {{m.message}}
+
+    <div *ngFor="let c of chatMessages" class="chat">
+
+      <ng-template #imageMessage>
+        <div class="message">
+          <img *ngIf="c.photo != 'undefined'; else hasPicture" class="profile-picture" src="http://localhost:3000\images\{{c.photo}}">
+          <span class="username">{{c.username}}:</span>
+          <img src="data:{{c.mimetype}};base64,{{c.image}}" class="imageMessage">
+        </div>
+      </ng-template>
+
+      <div *ngIf="c.type == 'message'; else imageMessage" class="message">
+        <img *ngIf="c.photo != 'undefined'; else hasPicture" class="profile-picture" src="http://localhost:3000\images\{{c.photo}}">
+        <span class="username">{{c.username}}:</span> {{c.message}}
+      </div>
+
+
     </div>
+
+
 
   </div>
 
@@ -33,7 +49,7 @@
     </div>
     <br>
     <div class="input-group">
-      <input class="form-control" type="file" id="formFile" accept="image/*">
+      <input class="form-control" type="file" id="formFile" accept="image/*" (change)="onFileSelected($event)">
       <div class="input-group-append">
         <button class="btn btn-outline-primary" type="button" (click)="sendImage()">Send Image</button>
       </div>
