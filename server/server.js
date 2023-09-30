@@ -4,6 +4,7 @@ const cors = require("cors");
 const path = require("path");
 const http = require("http").Server(app);
 const {MongoClient} = require("mongodb");
+const {PeerServer} = require("peer");
 const io = require("socket.io") (http, {
     cors: {
         origin: "http://localhost:4200",
@@ -11,6 +12,13 @@ const io = require("socket.io") (http, {
     },
     maxHttpBufferSize: 1e8
 });
+
+PeerServer({
+    port: 3001,
+    path: "/"
+})
+
+console.log("Starting Peer server at: 3001");
 
 const sockets = require("./socket.js");
 const server = require("./listen.js");

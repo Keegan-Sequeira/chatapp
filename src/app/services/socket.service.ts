@@ -56,4 +56,14 @@ export class SocketService {
       this.socket.on("chatHistory", (data: any) => {observer.next(data)});
     })
   }
+
+  sendPeerID(peerID: string){
+    this.socket.emit("newPeerID", peerID);
+  }
+
+  getPeerID(){
+    return new Observable(observer => {
+      this.socket.on("peerID", (data: any) => {observer.next(data)});
+    })
+  }
 }

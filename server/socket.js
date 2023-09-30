@@ -16,8 +16,12 @@ module.exports = {
                     history[channel] = [];
                 } else {
                     socket.emit("chatHistory", history[channel]);
-                }
-                
+                }                
+            })
+
+            socket.on("newPeerID", (uuid) => {
+                io.to(joinedChannel).emit("peerID", uuid);
+                console.log("PeerID: " + uuid);
             })
 
             socket.on("message", (message, username, photo) => {
