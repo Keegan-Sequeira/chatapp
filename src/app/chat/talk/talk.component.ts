@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PeerService } from 'src/app/services/peer.service';
 import { SocketService } from 'src/app/services/socket.service';
 
 interface MessageData {
@@ -26,6 +27,20 @@ function _arrayBufferToBase64( buffer: ArrayBuffer ) {
   return window.btoa( binary );
 }
 
+interface VideoElement{
+  muted: boolean,
+  srcObject: MediaStream,
+  userId: string
+}
+
+const gumOptions = {
+  audio: true,
+  video: {
+    width: {ideal: 640},
+    height: {ideal: 360}
+  }
+}
+
 
 @Component({
   selector: 'app-talk',
@@ -47,13 +62,70 @@ export class TalkComponent implements OnInit{
   chatHistory: any;
   chatMessages: Chat[] = [];
 
-  constructor(private socketService: SocketService) {}
+  peerList: string[] = [];
+  videos: VideoElement[] = [];
+  currentStream: any;
+  isCallStarted: boolean = false;
+  currentCall: any;
+
+
+  constructor(private socketService: SocketService, private peerService: PeerService) {}
 
   ngOnInit(){
     this.username = localStorage.getItem("username") ?? "";
     this.picture = localStorage.getItem("picture") ?? "";
     this.initIoConnection();
+    this.initPeerJS();
+    
   }
+
+  private initPeerJS(){
+    this.socketService.getPeerID()
+    .subscribe( (data: any) => {
+      if (data != this.peerService.myPeerId){
+        console.log(data);
+        this.peerList.push(data);
+      }
+    })
+
+    this.streamCamera();
+  }
+
+  private addMyVideo(stream: MediaStream){
+    this.videos.push({
+      muted: true,
+      srcObject: stream,
+      userId: this.peerService.myPeerId
+    });
+  }
+
+  private addOtherUserVideo(userId: string, stream: MediaStream) {
+    let newVideo = {
+      muted: false,
+      srcObject: stream,
+      userId
+    }
+    let existing = false;
+    this.videos.forEach((v, i, newVideos) => {
+      if (v.userId == userId){
+        existing = true;
+        newVideos[i] = newVideo;
+      }
+    })
+    if (existing == false){
+      this.videos.push(newVideo);
+    }
+  }
+
+  async streamCamera(){
+    this.currentStream = await navigator.mediaDevices.getUserMedia(gumOptions);
+    this.addMyVideo(this.currentStream);
+    if (this.peerService.myPeer.disconnected) {
+      await this.peerService.myPeer.reconnect();
+    }
+    this.socketService.sendPeerID(this.peerService.myPeerId);
+  }
+
 
   private initIoConnection(){
     this.socketService.initSocket(this.channel, this.username);

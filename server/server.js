@@ -15,7 +15,10 @@ const io = require("socket.io") (http, {
 
 PeerServer({
     port: 3001,
-    path: "/"
+    path: "/",
+    corsOptions: {
+        origin: "http://localhost:4200"
+    }
 })
 
 console.log("Starting Peer server at: 3001");
@@ -25,7 +28,6 @@ const server = require("./listen.js");
 
 const PORT = 3000;
 const URL = "mongodb+srv://keegan:NzUmU87BjOlvF33f@cluster0.mpot7zv.mongodb.net/?retryWrites=true&w=majority";
-const dbName = "chatapp";
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());

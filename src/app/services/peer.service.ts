@@ -14,7 +14,6 @@ export class PeerService {
   constructor() {
     this.myPeer = new Peer(this.myPeerId, {
       host: "localhost",
-      secure: false,
       port: 3001,
       path: "/"
     })
