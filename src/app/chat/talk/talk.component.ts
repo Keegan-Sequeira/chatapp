@@ -85,10 +85,27 @@ export class TalkComponent implements OnInit{
       if (data != this.peerService.myPeerId){
         console.log(data);
         this.peerList.push(data);
+
+        this.initiateVideoCall(data);
       }
     })
 
     this.streamCamera();
+
+    this.peerService.myPeer.on('call', (call: any) => {
+      // Answer the call and add the remote stream to the video element
+      call.answer(this.currentStream);
+      call.on('stream', (remoteStream: any) => {
+        this.addOtherUserVideo(call.peer, remoteStream);
+      });
+    });
+  }
+
+  initiateVideoCall(userId: string) {
+    const call = this.peerService.myPeer.call(userId, this.currentStream);
+    call.on('stream', (remoteStream: any) => {
+      this.addOtherUserVideo(userId, remoteStream);
+    });
   }
 
   private addMyVideo(stream: MediaStream){
