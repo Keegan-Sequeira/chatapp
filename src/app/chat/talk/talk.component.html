@@ -2,7 +2,7 @@
 
 <div class="video">
 
-  <div *ngFor="let v of videos">
+  <div *ngFor="let v of videos" class="videos">
     <video class="stream" [srcObject]="v.srcObject" controls autoplay [muted]="v.muted"></video>
   </div>
 
