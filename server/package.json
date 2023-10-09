@@ -4,14 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./tests/unitTest.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chai": "^4.3.10",
+    "chai-http": "^4.4.0",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "formidable": "^3.5.1",
+    "mocha": "^10.2.0",
     "mongodb": "^6.1.0",
     "peer": "^1.0.1",
     "socket.io": "^4.7.2"

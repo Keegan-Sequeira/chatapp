@@ -77,12 +77,12 @@ const client = new MongoClient(URL, {});
         
         app.post("/api/image/upload", require("./routes/imgupload"));
 
+        app.emit("ready");
+
     } catch (error) {
         console.error("Error connecting to MongoDB: ", error);
     }
 })();
 
 
-
-
-
+module.exports = app;
