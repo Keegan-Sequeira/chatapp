@@ -67,6 +67,7 @@ export class TalkComponent implements OnInit{
   currentStream: any;
   isCallStarted: boolean = false;
   currentCall: any;
+  noCamera = false;
 
   mic: boolean = true;
   cam: boolean = true;
@@ -142,12 +143,19 @@ export class TalkComponent implements OnInit{
   }
 
   async streamCamera(){
-    this.currentStream = await navigator.mediaDevices.getUserMedia(gumOptions);
-    this.addMyVideo(this.currentStream);
+    this.currentStream = await navigator.mediaDevices.getUserMedia(gumOptions).catch(e => {
+      this.noCamera = true;
+    });
+
+    if (this.currentStream) {
+      this.addMyVideo(this.currentStream);
+    }
     if (this.peerService.myPeer.disconnected) {
       await this.peerService.myPeer.reconnect();
     }
     this.socketService.sendPeerID(this.peerService.myPeerId);
+    
+
   }
 
 

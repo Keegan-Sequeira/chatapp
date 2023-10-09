@@ -8,7 +8,7 @@
 
 </div>
 
-<div class="muteButtons">
+<div *ngIf="!noCamera" class="muteButtons">
   <button (click)="muteMic()" class="btn {{micColor}} mute">{{muteMicMessage}}</button>
   <button (click)="muteCam()" class="btn {{camColor}} mute">{{muteCamMessage}}</button>
 </div>
