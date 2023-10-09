@@ -8,6 +8,12 @@
 
 </div>
 
+<div class="muteButtons">
+  <button (click)="muteMic()" class="btn {{micColor}} mute">{{muteMicMessage}}</button>
+  <button (click)="muteCam()" class="btn {{camColor}} mute">{{muteCamMessage}}</button>
+</div>
+
+
 <ng-template #hasPicture>
   <img class="profile-picture" src="assets/images/default-user.jpg">
 </ng-template>

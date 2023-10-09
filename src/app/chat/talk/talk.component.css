@@ -20,6 +20,17 @@
     width: 100%;
 }
 
+.muteButtons {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+.mute{
+    width: 40%;
+    border-radius: 0;
+}
+
 .text{
     overflow-y: scroll;
     height: 15em;

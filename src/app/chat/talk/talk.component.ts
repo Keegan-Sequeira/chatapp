@@ -68,6 +68,13 @@ export class TalkComponent implements OnInit{
   isCallStarted: boolean = false;
   currentCall: any;
 
+  mic: boolean = true;
+  cam: boolean = true;
+  muteMicMessage: string = "Turn Off Microphone";
+  muteCamMessage: string = "Turn Off Camera";
+  micColor: string = "btn-danger";
+  camColor: string = "btn-danger";
+
 
   constructor(private socketService: SocketService, private peerService: PeerService) {}
 
@@ -188,5 +195,32 @@ export class TalkComponent implements OnInit{
 
   sendImage(){
     this.socketService.uploadImage(this.selectedFile, this.selectedFile.type, this.username, this.picture);
+  }
+
+  muteMic(){
+    this.currentStream.getAudioTracks().forEach((track: { enabled: boolean; }) => track.enabled = !track.enabled);
+    this.mic = !this.mic;
+
+    if(this.mic) {
+      this.muteMicMessage = "Turn Off Microphone";
+      this.micColor = "btn-danger";
+    } else {
+      this.muteMicMessage = "Turn On Microphone";
+      this.micColor = "btn-success";
+    }
+  }
+
+  muteCam() {
+    this.currentStream.getVideoTracks().forEach((track: {enabled: boolean}) => track.enabled = !track.enabled);
+
+    this.cam = !this.cam;
+
+    if(this.cam) {
+      this.muteCamMessage = "Turn Off Camera";
+      this.camColor = "btn-danger";
+    } else {
+      this.muteCamMessage = "Turn On Camera";
+      this.camColor = "btn-success";
+    }
   }
 }
