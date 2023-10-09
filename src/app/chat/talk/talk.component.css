@@ -10,13 +10,20 @@
 .videos {
     width: auto;
     max-width: 33.33%;
-    height: auto;
+    height: max-content;
     box-sizing: border-box;
-    border: solid var(--bs-primary);
+    background-color: black;
+    position: relative;
 }
 
 .videos video{
     width: 100%;
+}
+
+.videousername {
+    width: 100%;
+    text-align: right;
+    color: white;
 }
 
 .text{
