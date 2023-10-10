@@ -6,6 +6,6 @@ module.exports = async(req, res) => {
     const collection = db.collection("groups");
 
     const returnGroups = await collection.find({"id": {"$in": groups}}).toArray();
-
+    
     res.send({groups: returnGroups});
 };
