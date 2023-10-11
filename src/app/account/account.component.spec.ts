@@ -35,6 +35,7 @@ describe('AccountComponent', () => {
   });
   
   it("should redirect user back home if not logged in", fakeAsync(() => {
+    localStorage.clear();
     localStorage.setItem("groups", "[1]");
     const mockResponse = {
       groups: [{name: "test", id: 1}]
