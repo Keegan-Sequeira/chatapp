@@ -1,6 +1,6 @@
 import "cypress-localstorage-commands";
 
-describe('Test Login, Signup, and Logout Functions', () => {
+describe('End to End Testing for all Pages', () => {
   beforeEach(() => {
     cy.visit("/");
     cy.restoreLocalStorage();
@@ -107,5 +107,66 @@ describe('Test Login, Signup, and Logout Functions', () => {
 
     cy.wait(2000);
     cy.get(".list-group-item").contains("Channel 4").should("not.exist");
+  })
+
+  it("should add user to a group", () => {
+    cy.get(".nav-link").contains("Manage Groups").click();
+    cy.get(".list-group-item").contains("Bob's Private Group").click();
+
+    cy.get(".channel").contains("li", "kate312").next("button").contains("Add").click();
+    cy.wait(2000);
+
+    cy.get(".channel").contains("li", "kate312").next("button").contains("Remove").should("exist");
+  })
+
+  it("should remove a  user from a group", () => {
+    cy.get(".nav-link").contains("Manage Groups").click();
+    cy.get(".list-group-item").contains("Bob's Private Group").click();
+
+    cy.get(".channel").contains("li", "kate312").next("button").contains("Remove").click();
+    cy.wait(2000);
+
+    cy.get(".channel").contains("li", "kate312").next("button").contains("Add").should("exist");
+  })
+
+  it("should promote a user to a group admin", () => {
+    cy.get(".nav-link").contains("Manage Users").click();
+
+    cy.get(".user").contains("li", "kate312").next("button").contains("Promote").click();
+    cy.wait(2000);
+
+    cy.get(".user").contains("li", "kate312").next("button").next("button").contains("Demote").should("exist");
+  })
+
+  it("should demote a group admin to a user", () => {
+    cy.get(".nav-link").contains("Manage Users").click();
+
+    cy.get(".user").contains("li", "kate312").next("button").next("button").contains("Demote").click();
+    cy.wait(2000);
+
+    cy.get(".user").contains("li", "kate312").next("button").contains("Promote").should("exist");
+  })
+
+  it("should update profile picture for user", () => {
+    cy.get(".nav-link").contains("Account").click();
+
+    cy.get("#uploadfile").selectFile("./cypress/downloads/profile.png");
+    cy.get("button").contains("Update").click();
+
+    cy.window().then((win) => {
+      cy.get(".profile-image").should("exist");
+    });
+  })
+
+  it("should send a message in a chat", () => {
+    cy.get(".nav-link").contains("Chat").click();
+
+    cy.get(".group").contains("Open Group").click();
+    cy.get(".channel").contains("Channel 1").click();
+
+    cy.get("#messageContent").type("Hello from Cypress!");
+    cy.get("button").contains("Send").click();
+
+    cy.get(".message").contains("Hello from Cypress!").should("exist");
   })
 })
