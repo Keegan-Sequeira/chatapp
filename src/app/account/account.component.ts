@@ -22,7 +22,7 @@ export class AccountComponent implements OnInit {
   ngOnInit(){
     let loggedIn = localStorage.getItem("valid");
     if (!loggedIn){
-      this.router.navigate(["/login"]);
+      this.router.navigate(["/"]);
     }
 
     this.username = localStorage.getItem("username") ?? "";
@@ -43,17 +43,22 @@ export class AccountComponent implements OnInit {
   }
 
   updateProfile(){
-    const fd = new FormData();
-    fd.append("image", this.selectedFile, this.selectedFile.name);
-    fd.append("userID", this.userID);
-    console.log(fd);
-    this.api.imgUpload(fd).subscribe(res => {
-      if (res.result == "OK") {
-        this.imgpath = res.data.filename;
-        localStorage.setItem("picture", res.data.filename);
-      } else {
-        alert("There was an error uploading image. Please try again later.")
-      }
-    });
+    if (this.selectedFile){
+      const fd = new FormData();
+      fd.append("image", this.selectedFile, this.selectedFile.name);
+      fd.append("userID", this.userID);
+      console.log(fd);
+      this.api.imgUpload(fd).subscribe(res => {
+        if (res.result == "OK") {
+          this.imgpath = res.data.filename;
+          localStorage.setItem("picture", res.data.filename);
+        } else {
+          alert("There was an error uploading image. Please try again later.")
+        }
+      });
+    } else {
+      alert("Please select a file.");
+    }
+
   }
 }

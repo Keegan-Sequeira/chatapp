@@ -18,7 +18,7 @@ export class UserManagerComponent implements OnInit{
 
     let validUser = localStorage.getItem("highestRole");
 
-    if (validUser != "GA" && validUser != "SA"){
+    if (validUser != "SA"){
       this.router.navigate(["/"]);
     }
 

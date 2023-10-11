@@ -24,6 +24,7 @@ export class GroupComponent implements OnInit {
   constructor(private route: ActivatedRoute, private api: ApiService, private router: Router) {}
 
   ngOnInit() {
+    console.log("start component");
 
     let validUser = localStorage.getItem("highestRole");
 
