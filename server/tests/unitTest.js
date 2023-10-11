@@ -132,4 +132,123 @@ describe("Test Server Routes", function() {
             })
         })
     })
+
+    // describe("test POST /api/groups/channel/create", () => {
+    //     it("Should create a new channel in the given group, and return successful", (done) => {
+    //         chai.request(app).post("/api/groups/channel/create")
+    //         .send({name: "New Test Channel", groupID: 5}).end((err, res) => {
+    //             res.should.have.status(200);
+    //             res.body.should.be.a("object");
+    //             assert.equal(res.body.successful, true);
+    //             done();
+    //         })
+    //     })
+
+    //     it("Should create a second new channel in the same group to test delete later", (done) => {
+    //         chai.request(app).post("/api/groups/channel/create")
+    //         .send({name: "New Test Channel 2", groupID: 5}).end((err, res) => {
+    //             res.should.have.status(200);
+    //             res.body.should.be.a("object");
+    //             assert.equal(res.body.successful, true);
+    //             done();
+    //         })
+    //     })
+    // })
+
+    // describe("test POST /api/groups/channel/delete", () => {
+    //     it("Should delete channel from group, and return successful", (done) => {
+    //         chai.request(app).post("/api/groups/channel/delete")
+    //         .send({groupID: 5, channel: "New Test Channel 2"}).end((err, res) => {
+    //             res.should.have.status(200);
+    //             res.body.should.be.a("object");
+    //             assert.equal(res.body.successful, true);
+    //             done();
+    //         })
+    //     })
+    // })
+
+    describe("test GET /api/user/list", () => {
+        it("Should return a list of all Group Admins and Users IDs. Sorted in their respective arrays", (done) => {
+            chai.request(app).get("/api/user/list")
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a("object");
+                res.body.should.have.property("GA");
+                res.body.should.have.property("US");
+                done();
+            })
+        })
+    })
+
+    // describe("test POST /api/user/promote", () => {
+    //     it("Should add GA role to user", (done) => {
+    //         chai.request(app).post("/api/user/promote")
+    //         .send({userID: 6, rank: "GA"}).end((err, res) => {
+    //             res.should.have.status(200);
+    //             res.body.should.be.a("object");
+    //             assert.equal(res.body.successful, true);
+    //             done();
+    //         })
+    //     })
+
+    //     it("Should add SA role to user", (done) => {
+    //         chai.request(app).post("/api/user/promote")
+    //         .send({userID: 2, rank: "SA"}).end((err, res) => {
+    //             res.should.have.status(200);
+    //             res.body.should.be.a("object");
+    //             assert.equal(res.body.successful, true);
+    //             done();
+    //         })
+    //     })
+    // })
+
+    // describe("test POST /api/user/demote", () => {
+    //     it("Should demote the Group Admin back to a user", (done) => {
+    //         chai.request(app).post("/api/user/demote")
+    //         .send({userID: 6}).end((err, res) => {
+    //             res.should.have.status(200);
+    //             res.body.should.be.a("object");
+    //             assert.equal(res.body.successful, true);
+    //             done();
+    //         })
+    //     })
+    // })
+
+    describe("test POST /api/groups/getusers", () => {
+        it("Should get all the users in the group, and not in group", (done) => {
+            chai.request(app).post("/api/groups/getusers")
+            .send({groupID: 1}).end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a("object");
+                res.body.should.have.property("in");
+                res.body.should.have.property("out");
+                done();
+            })
+        })
+    })
+
+    
+    describe("test POST /api/groups/adduser", () => {
+        it("Should add a user to the group", (done) => {
+            chai.request(app).post("/api/groups/adduser")
+            .send({username: "tay_la", groupID: 2}).end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a("object");
+                assert.equal(res.body.successful, true);
+                done();
+            })
+        })
+    })
+
+    describe("test POST /api/groups/removeuser", () => {
+        it("Should remove the user from the group", (done) => {
+            chai.request(app).post("/api/groups/removeuser")
+            .send({username: "tay_la", groupID: 2}).end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a("object");
+                assert.equal(res.body.successful, true);
+                done();
+            })
+        })
+    })
 })
