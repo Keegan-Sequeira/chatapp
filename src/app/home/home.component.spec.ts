@@ -18,4 +18,12 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should set user if logged in', () => {
+    localStorage.setItem("username", "super");
+
+    component.ngDoCheck();
+
+    expect(component.user).toBe("super");
+  })
 });
