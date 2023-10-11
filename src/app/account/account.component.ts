@@ -38,10 +38,13 @@ export class AccountComponent implements OnInit {
     });
   }
 
+  // This function is triggered when a file is selected by the user. 
+  // It takes in an event parameter and assigns the first file in the target files array to the selectedFile variable.
   onFileSelected(event: any){
     this.selectedFile = event.target.files[0];
   }
 
+  // The  updateProfile()  function is responsible for updating the user's profile. 
   updateProfile(){
     if (this.selectedFile){
       const fd = new FormData();

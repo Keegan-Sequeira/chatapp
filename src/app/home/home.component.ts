@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
     this.title.setTitle("ChatLink")
   }
 
+  // Check if there is a user signed in and get username
   ngDoCheck(){
     this.user = localStorage.getItem("username") ?? "";
   }

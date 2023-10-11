@@ -87,6 +87,7 @@ export class TalkComponent implements OnInit{
     
   }
 
+  // Initialise peer js connection and get camera access
   private initPeerJS(){
     this.socketService.getPeerID()
     .subscribe( (data: any) => {
@@ -109,6 +110,7 @@ export class TalkComponent implements OnInit{
     });
   }
 
+  // Create video call
   initiateVideoCall(userId: string) {
     const call = this.peerService.myPeer.call(userId, this.currentStream);
     call.on('stream', (remoteStream: any) => {
@@ -116,6 +118,7 @@ export class TalkComponent implements OnInit{
     });
   }
 
+  // Add user's video to array
   private addMyVideo(stream: MediaStream){
     this.videos.push({
       muted: true,
@@ -124,6 +127,7 @@ export class TalkComponent implements OnInit{
     });
   }
 
+  // Add other user's videos to array
   private addOtherUserVideo(userId: string, stream: MediaStream) {
     let newVideo = {
       muted: false,
@@ -142,6 +146,7 @@ export class TalkComponent implements OnInit{
     }
   }
 
+  // Get camera and microphone input
   async streamCamera(){
     this.currentStream = await navigator.mediaDevices.getUserMedia(gumOptions).catch(e => {
       this.noCamera = true;
@@ -158,7 +163,7 @@ export class TalkComponent implements OnInit{
 
   }
 
-
+  // Initialise socket connection and subscribe to observables
   private initIoConnection(){
     this.socketService.initSocket(this.channel, this.username);
     this.ioConnection = this.socketService.getMessage()
@@ -184,6 +189,7 @@ export class TalkComponent implements OnInit{
     })
   }
 
+  // Send a new message in chat
   send(){
     if (this.messageContent){
       this.socketService.send(this.messageContent, this.username, this.picture);
@@ -193,18 +199,22 @@ export class TalkComponent implements OnInit{
     }
   }
 
+  // Disconnect socket connection
   ngOnDestroy(){
     this.socketService.userLeft(this.username);
   }
 
+  // When user selects a file from the input
   onFileSelected(event: any){
     this.selectedFile = event.target.files[0];
   }
 
+  // Send image through socket service
   sendImage(){
     this.socketService.uploadImage(this.selectedFile, this.selectedFile.type, this.username, this.picture);
   }
 
+  // Disable microphone input
   muteMic(){
     this.currentStream.getAudioTracks().forEach((track: { enabled: boolean; }) => track.enabled = !track.enabled);
     this.mic = !this.mic;
@@ -218,6 +228,7 @@ export class TalkComponent implements OnInit{
     }
   }
 
+  // Disable video input
   muteCam() {
     this.currentStream.getVideoTracks().forEach((track: {enabled: boolean}) => track.enabled = !track.enabled);
 

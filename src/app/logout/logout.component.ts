@@ -10,6 +10,7 @@ export class LogoutComponent implements OnInit{
 
   constructor (private router: Router) {}
 
+  // Log user out by clearing all data
   ngOnInit() {
 
     localStorage.clear();

@@ -47,10 +47,12 @@ export class GroupComponent implements OnInit {
     });
   }
 
+  // function to reload page
   reloadPage(){
     window.location.reload();
   }
 
+  // Create a new channel in the given group
   newChannel(){
     this.api.apiPost("/api/groups/channel/create", {name: this.name, groupID: this.id})
     .subscribe( (data: any) => {
@@ -63,6 +65,7 @@ export class GroupComponent implements OnInit {
     });
   }
   
+  // Delete channel from group
   deleteChannel(channel: string){
     this.api.apiPost("/api/groups/channel/delete", {groupID: this.id, "channel": channel})
     .subscribe( (data:any) => {
@@ -75,6 +78,7 @@ export class GroupComponent implements OnInit {
     });
   }
 
+  // Remove user from group
   removeUser(user: string){
     this.api.apiPost("/api/groups/removeuser", {username: user, groupID: this.id})
     .subscribe (( data: any) => {
@@ -87,6 +91,7 @@ export class GroupComponent implements OnInit {
     });
   };
 
+  // Add user to group
   addUser(user: string){
     this.api.apiPost("/api/groups/adduser", {username: user, groupID: this.id})
     .subscribe (( data: any) => {

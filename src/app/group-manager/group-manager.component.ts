@@ -33,10 +33,12 @@ export class GroupManagerComponent implements OnInit{
     });
   }
 
+  // function to reload page
   reloadPage(){
     window.location.reload();
   }
 
+  // Create a new group
   createGroup(){
     this.api.apiPost("/api/groups/create", {name: this.name, userId: this.userId})
     .subscribe( (data: any) => {

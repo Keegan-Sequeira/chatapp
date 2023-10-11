@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit{
     this.title.setTitle("Login")
   }
 
+  // Allow user to show and hide password
   showPassword(){
     if (this.field?.nativeElement.type == "password"){
       this.field.nativeElement.type = "text";
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit{
     }
   }
 
+  // When user clicks login, validate with server
   login(){
     let body = {
       username: this.username,
@@ -52,8 +54,6 @@ export class LoginComponent implements OnInit{
         alert("Incorrect username or password");
       }
     });
-
-
     
   }
 }

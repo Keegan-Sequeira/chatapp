@@ -26,6 +26,7 @@ export class ChannelsComponent implements OnInit{
 
   }
 
+  // When a channel is selected by the user
   selectChannel(channel: string, channelDiv: any){
 
     this.renderer.addClass(channelDiv, "selected");

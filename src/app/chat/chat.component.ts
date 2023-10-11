@@ -36,6 +36,7 @@ export class ChatComponent implements OnInit{
     });
   }
 
+  // Show channels in html
   showChannels(id: any, groupDiv: any){
     this.channelContainer.clear();
     const component = this.channelContainer.createComponent(ChannelsComponent);
@@ -52,6 +53,7 @@ export class ChatComponent implements OnInit{
     this.renderer.addClass(groupDiv, "selected");
   }
 
+  // When a channel div is click by the user
   channelSelected(channel: string){
     this.talkContainer.clear();
     const component = this.talkContainer.createComponent(TalkComponent);

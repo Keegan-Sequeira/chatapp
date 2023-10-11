@@ -31,20 +31,24 @@ export class SocketService {
     })
   }
   
+  // Listen for new notifications
   notification(){
     return new Observable(observer => {
       this.socket.on("notification", (data: any) => {observer.next(data)});
     })
   }
 
+  // Emit a user left
   userLeft(username: string){
     this.socket.emit("left", username);
   }
 
+  // Send image to socket server
   uploadImage(file: any, mimetype: string, username: string, photo: string) {
     this.socket.emit("imageToServer", file, mimetype, username, photo);
   }
 
+  // Listen for incoming images
   incomingImage(){
     return new Observable(observer => {
       this.socket.on("imageToClient", (data: any) => {observer.next(data)});
