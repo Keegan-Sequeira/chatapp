@@ -29,6 +29,10 @@ export class UserManagerComponent implements OnInit{
     });
   }
 
+  reloadPage(){
+    window.location.reload();
+  }
+
   promote(user: any, newRank: string){
     this.api.apiPost("/api/user/promote", {userID: user, rank: newRank})
     .subscribe( (data: any) => {
@@ -37,7 +41,7 @@ export class UserManagerComponent implements OnInit{
       } else {
         alert("Error. Try Again Later.");
       }
-      window.location.reload();
+      this.reloadPage();
     });
   }
 
@@ -49,7 +53,7 @@ export class UserManagerComponent implements OnInit{
       } else {
         alert("Error. Try Again Later.");
       }
-      window.location.reload();
+      this.reloadPage();
     });
   }
 

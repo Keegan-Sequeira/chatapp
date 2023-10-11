@@ -46,6 +46,10 @@ export class GroupComponent implements OnInit {
     });
   }
 
+  reloadPage(){
+    window.location.reload();
+  }
+
   newChannel(){
     this.api.apiPost("/api/groups/channel/create", {name: this.name, groupID: this.id})
     .subscribe( (data: any) => {
@@ -54,7 +58,7 @@ export class GroupComponent implements OnInit {
       } else {
         alert("There was an error creating channel.");
       }
-      window.location.reload();
+      this.reloadPage()
     });
   }
   
@@ -66,7 +70,7 @@ export class GroupComponent implements OnInit {
       } else {
         alert("There was an error deleting channel.")
       }
-      window.location.reload();
+      this.reloadPage()
     });
   }
 
@@ -78,7 +82,7 @@ export class GroupComponent implements OnInit {
       } else {
         alert("There was an error removing user.");
       }
-      window.location.reload();
+      this.reloadPage()
     });
   };
 
@@ -90,7 +94,7 @@ export class GroupComponent implements OnInit {
       } else {
         alert("There was an error adding user.");
       }
-      window.location.reload();
+      this.reloadPage()
     });
   };
 
